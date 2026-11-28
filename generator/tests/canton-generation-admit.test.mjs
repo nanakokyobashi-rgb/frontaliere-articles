@@ -30,6 +30,7 @@ import {
   RUNS_PER_PAGE,
   RC_SENTINEL_ENV,
   articleCommitSubject,
+  cadenceSlotHour,
   countSectionArticles,
   decideCantonAdmission,
   effectiveDailyBudget,
@@ -49,6 +50,10 @@ import {
   loadCantonSectionProfiles,
 } from '../scripts/lib/canton-section-profile.mjs';
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
+import {
+  CANTON_HIGH_CADENCE_ENV,
+  HIGH_CADENCE_DAILY_BUDGET,
+} from '../scripts/lib/canton-high-cadence.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SCRIPT = path.join(ROOT, 'scripts/ci/canton-generation-admit.mjs');
@@ -713,4 +718,164 @@ test('lo sparse checkout del gate copre tutto cio\' che i suoi script importano'
   const uncovered = [...files].filter((f) => !dirs.some((d) => f.startsWith(`${d}/`)));
   assert.deepEqual(uncovered, [], `file fuori dallo sparse checkout (${dirs.join(', ')}): il gate morirebbe su un import`);
   assert.ok(files.size > 5, 'la chiusura degli import e\' sospettosamente piccola');
+});
+
+
+// ── F3.A: manopola CANTON_HIGH_CADENCE_SECTIONS, budget 24, admit-cadence ────
+
+/**
+ * Il calendario di PRIMA della manopola (generator/data/canton-generation-slots.json
+ * su origin/main 1ed71abd6d, cadenceHours 6): le ore UTC dei 4 slot al giorno
+ * di ogni cantone. E' la verita' di «oggi» contro cui si prova la lista vuota.
+ */
+const LEGACY_SLOT_HOURS = {
+  'canton-ag': [0, 6, 12, 18], 'canton-appenzello': [0, 6, 12, 18], 'canton-basilea': [0, 6, 12, 18], 'canton-be': [0, 6, 12, 18],
+  'canton-fr': [1, 7, 13, 19], 'canton-ge': [1, 7, 13, 19], 'canton-gl': [1, 7, 13, 19], 'canton-gr': [1, 7, 13, 19],
+  'canton-ju': [2, 8, 14, 20], 'canton-lu': [2, 8, 14, 20], 'canton-ne': [2, 8, 14, 20], 'canton-nw': [2, 8, 14, 20],
+  'canton-ow': [3, 9, 15, 21], 'canton-sg': [3, 9, 15, 21], 'canton-sh': [3, 9, 15, 21], 'canton-so': [3, 9, 15, 21],
+  'canton-sz': [4, 10, 16, 22], 'canton-tg': [4, 10, 16, 22], 'canton-ti': [4, 10, 16, 22], 'canton-ur': [4, 10, 16, 22],
+  'canton-vd': [5, 11, 17, 23], 'canton-vs': [5, 11, 17, 23], 'canton-zg': [5, 11, 17, 23], 'canton-zh': [5, 11, 17, 23],
+};
+
+const slotKey = (section, hour, minute = 19) => `generate-article/${section}/2026-11-28T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}Z`;
+const envAll = (extra = {}) => ({ [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'all', ...extra });
+const allActive = Object.fromEntries(PROFILES.cantons.map((c) => [c.section, {}]));
+
+test('lista vuota = oggi: per tutti i 24 cantoni e tutte le 24 ore gli slot ammessi sono quelli del calendario di prima, slot per slot', () => {
+  assert.deepEqual(Object.keys(LEGACY_SLOT_HOURS).sort(), PROFILES.cantons.map((c) => c.section).sort());
+  let admitted = 0;
+  let skipped = 0;
+  for (const { section } of PROFILES.cantons) {
+    for (const listValue of [undefined, '', '   ']) {
+      for (let hour = 0; hour < 24; hour += 1) {
+        const r = readers();
+        const v = decideCantonAdmission({
+          section,
+          env: envAll(listValue === undefined ? {} : { [CANTON_HIGH_CADENCE_ENV]: listValue }),
+          eventName: 'workflow_dispatch',
+          dispatchOrigin: 'cloud_scheduler',
+          activeSections: allActive,
+          selfId: 100,
+          slotHour: cadenceSlotHour({ DISPATCH_ORIGIN: 'cloud_scheduler', RECOVERY_SLOT: slotKey(section, hour) }),
+          ...r,
+        });
+        const today = LEGACY_SLOT_HOURS[section].includes(hour);
+        assert.equal(v.proceed, today, `${section} ${hour}:xx (${v.reason})`);
+        if (today) {
+          assert.equal(v.reason, 'admitted', `${section} ${hour}`);
+          admitted += 1;
+        } else {
+          assert.equal(v.reason, 'admit-cadence', `${section} ${hour}`);
+          assert.equal(v.consumeSlot, true);
+          assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 }, 'il salto precede ogni lettura GitHub e ogni chiamata a un modello');
+          skipped += 1;
+        }
+      }
+    }
+  }
+  assert.equal(admitted, 24 * 4 * 3);
+  assert.equal(skipped, 24 * 20 * 3);
+});
+
+test('admit-cadence: una sezione in lista ammette ogni slot orario, le altre no', () => {
+  for (let hour = 0; hour < 24; hour += 1) {
+    const decision = (list) => decideCantonAdmission({
+      section: SECTION,
+      env: envAll({ [CANTON_HIGH_CADENCE_ENV]: list }),
+      eventName: 'workflow_dispatch',
+      dispatchOrigin: 'cloud_scheduler',
+      activeSections: allActive,
+      slotHour: hour,
+      ...readers(),
+    });
+    for (const list of ['canton-ti', 'TI', 'canton-gr, canton-ti', 'all']) {
+      const v = decision(list);
+      assert.equal(v.proceed, true, `${list} ${hour}`);
+      assert.equal(v.reason, 'admitted');
+    }
+    // Una sezione che non e' in lista resta sulla cadenza di base, anche se ne sono in lista altre.
+    assert.equal(decision('canton-gr').proceed, LEGACY_SLOT_HOURS[SECTION].includes(hour), `fuori lista ${hour}`);
+  }
+});
+
+test('admit-cadence vale solo per gli slot: dispatch manuale, anelli e push non hanno un\'ora di calendario', () => {
+  assert.equal(cadenceSlotHour({ DISPATCH_ORIGIN: 'manual', EVENT_NAME: 'workflow_dispatch' }), null);
+  assert.equal(cadenceSlotHour({ DISPATCH_ORIGIN: 'chain', EVENT_NAME: 'workflow_dispatch', RECOVERY_SLOT: slotKey(SECTION, 3) }), null);
+  assert.equal(cadenceSlotHour({ EVENT_NAME: 'push' }), null);
+  assert.equal(cadenceSlotHour({ DISPATCH_ORIGIN: 'cloud_scheduler', RECOVERY_SLOT: 'non-uno-slot' }), null);
+  assert.equal(cadenceSlotHour({ DISPATCH_ORIGIN: 'cloud_scheduler', RECOVERY_SLOT: slotKey(SECTION, 22, 7) }), 22);
+  assert.equal(cadenceSlotHour({ EVENT_NAME: 'schedule' }, new Date('2026-11-28T17:30:00Z')), 17);
+  // Un anello (origine chain, nessuna ora di slot) di una sezione fuori lista non e' mai saltato per cadenza.
+  const v = decide({ env: envAll(), eventName: 'workflow_dispatch', dispatchOrigin: 'chain', slotHour: null }, readers());
+  assert.equal(v.proceed, true);
+  assert.equal(v.reason, 'admitted');
+});
+
+test('budget: 24 per le sezioni in lista, 4 per le altre, con vars.CANTON_DAILY_BUDGET_CAP come tetto inferiore', () => {
+  assert.equal(HIGH_CADENCE_DAILY_BUDGET, 24);
+  const profile = { section: SECTION, dailyBudget: 4 };
+  assert.equal(effectiveDailyBudget(profile, ''), 4);
+  assert.equal(effectiveDailyBudget(profile, '', { highCadence: true }), 24);
+  assert.equal(effectiveDailyBudget(profile, '10', { highCadence: true }), 10, 'il tetto resta un limite inferiore');
+  assert.equal(effectiveDailyBudget(profile, '99', { highCadence: true }), 24, 'un tetto piu\' alto non alza il budget');
+  assert.equal(effectiveDailyBudget(profile, '3'), 3);
+
+  const subjects = (n) => Array.from({ length: n }, () => articleCommitSubject(SECTION));
+  const inList = { ...ENV_ON, [CANTON_HIGH_CADENCE_ENV]: 'canton-ti' };
+  assert.equal(decide({ env: inList }, readers({ subjects: subjects(23) })).proceed, true);
+  const full = decide({ env: inList }, readers({ subjects: subjects(24) }));
+  assert.equal(full.proceed, false);
+  assert.equal(full.reason, 'daily-budget', 'la catena si ferma da sola al budget');
+  assert.match(full.detail, /24 articoli nelle ultime 24h su un budget di 24/);
+  // Fuori lista restano 4, e 4 articoli bastano a chiudere il giorno.
+  assert.equal(decide({}, readers({ subjects: subjects(4) })).reason, 'daily-budget');
+  const capped = decide({ env: { ...inList, CANTON_DAILY_BUDGET_CAP: '10' } }, readers({ subjects: subjects(10) }));
+  assert.equal(capped.reason, 'daily-budget');
+  assert.match(capped.detail, /su un budget di 10/);
+});
+
+test('CLI: admit-cadence esce 0, scrive consume_slot=true e il marcatore, senza leggere GitHub', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'canton-admit-cadence-'));
+  try {
+    const out = path.join(dir, 'output');
+    writeFileSync(out, '');
+    const res = spawnSync(process.execPath, [SCRIPT], {
+      encoding: 'utf8',
+      env: {
+        PATH: process.env.PATH, HOME: dir, GITHUB_OUTPUT: out,
+        SECTION, EVENT_NAME: 'workflow_dispatch', DISPATCH_ORIGIN: 'cloud_scheduler',
+        RECOVERY_SLOT: slotKey(SECTION, 5), SELF_ID: '1',
+        [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'TI',
+      },
+    });
+    assert.equal(res.status, 0, res.stderr);
+    assert.match(readFileSync(out, 'utf8'), /^proceed=false\nreason=admit-cadence\nconsume_slot=true\n$/);
+    assert.match(res.stdout, new RegExp(`GENERATION_OUTCOME kind=skipped reason=admit-cadence section=${SECTION}`));
+    assert.doesNotMatch(res.stderr, /gh api|canton-admit: gh/);
+
+    // Con la sezione in lista lo stesso slot va avanti (qui si ferma sul GitHub non raggiungibile: fail-closed).
+    writeFileSync(out, '');
+    const inList = spawnSync(process.execPath, [SCRIPT], {
+      encoding: 'utf8',
+      env: {
+        PATH: '/nonexistent', HOME: dir, GITHUB_OUTPUT: out,
+        SECTION, EVENT_NAME: 'workflow_dispatch', DISPATCH_ORIGIN: 'cloud_scheduler',
+        RECOVERY_SLOT: slotKey(SECTION, 5), SELF_ID: '1',
+        [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'TI', [CANTON_HIGH_CADENCE_ENV]: 'TI',
+      },
+    });
+    assert.equal(inList.status, 0, inList.stderr);
+    assert.doesNotMatch(readFileSync(out, 'utf8'), /admit-cadence|consume_slot/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('section_gate: lo slot fuori cadenza viene consumato nel registro senza aprire il job generate', () => {
+  const gate = jobBlock('section_gate');
+  assert.match(gate, /RECOVERY_SLOT: \$\{\{ inputs\.recovery_slot \}\}\n {10}QUOTA_BEACON_PEER_REPO/, 'admit legge l\'ora dello slot');
+  assert.match(gate, /id: claim\n {8}if: inputs\.dispatch_origin == 'cloud_scheduler' && \(steps\.canton\.outputs\.proceed == 'true' \|\| steps\.canton\.outputs\.consume_slot == 'true'\)/);
+  assert.match(gate, /CONSUME_SLOT: \$\{\{ steps\.canton\.outputs\.consume_slot \}\}/);
+  // Dopo la conferma, uno slot consumato esce proceed=false: il job generate non parte.
+  assert.match(gate, /if \[ "\$CONSUME_SLOT" = 'true' \]; then\n[^\n]*\n {14}echo 'proceed=false' >> "\$GITHUB_OUTPUT"\n {12}else\n[^\n]*\n {14}echo 'proceed=true' >> "\$GITHUB_OUTPUT"/);
 });

@@ -26,7 +26,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -53,6 +53,7 @@ import {
   stripComments,
 } from '../../scripts/ci/generate-canton-article-workflows.mjs';
 import { parseReservedCronMinutes } from '../../scripts/ci/validate-canton-sections.mjs';
+import { baseSlotHoursBySection } from '../scripts/lib/canton-high-cadence.mjs';
 import { cantonSectionPaths, loadCantonSectionProfiles } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 
@@ -573,6 +574,8 @@ function runChain(workflow, env) {
     sleep: '#!/usr/bin/env bash\nexit 0\n',
   }), (dir, bin) => {
     writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Chain — dispatch the next link'));
+    // Lo step lancia `node generator/scripts/lib/canton-high-cadence.mjs`: il cwd del job e' la radice del repo.
+    symlinkSync(path.join(ROOT, 'generator'), path.join(dir, 'generator'));
     const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
       encoding: 'utf8',
       cwd: dir,
@@ -643,6 +646,88 @@ test('Chain: un cantone non dispatcha nessun successore', () => {
   const armed = runChain(CORE, { ...canton, CHAIN_DISPATCH: 'true' });
   assert.equal(armed.url, 'https://api.github.com/repos/owner/repo/actions/workflows/generate-article-ti.yml/dispatches');
   assert.equal(armed.payload.inputs.section, 'canton-ti');
+});
+
+// ── Catena cantonale dietro CANTON_HIGH_CADENCE_SECTIONS (F3.A.3) ────────────
+
+const HIGH = {
+  CALLER_WORKFLOW: 'generate-article-ti.yml', PRIMARY_SECTION: 'canton-ti', SIBLING_SECTION: '',
+  SECTION_PRODUCED: 'canton-ti', SECTION_REQUESTED: 'canton-ti',
+  CHAIN_DISPATCH: 'false', CHAIN_SCOPE: 'canton-high-cadence', CANTON_HIGH_CADENCE_SECTIONS: 'canton-ti',
+};
+
+test('Chain cantonale: con la lista vuota o senza la sezione in lista non parte nessun anello, articolo compreso', () => {
+  for (const list of ['', '   ', 'canton-gr', 'GR, canton-zh', 'tutti', 'canton-t']) {
+    for (const extra of [{ DECLARED: 'true' }, { ARTICLE: 'true' }, { DECLARED: 'false' }]) {
+      const res = runChain(CORE, { ...HIGH, CANTON_HIGH_CADENCE_SECTIONS: list, ...extra });
+      assert.equal(res.dispatched, false, `${JSON.stringify(list)} ${JSON.stringify(extra)}`);
+      assert.equal(res.status, 0);
+      assert.match(res.stdout, /catena ferma: catena via dispatch spenta/);
+    }
+  }
+  // Senza `chain_scope` (il self-test, un caller di un'altra famiglia) la manopola non arma niente.
+  const noScope = runChain(CORE, { ...HIGH, CHAIN_SCOPE: '' });
+  assert.equal(noScope.dispatched, false);
+});
+
+test('Chain cantonale: un esito dichiarato dispatcha il successore dello STESSO cantone, dal PROPRIO chiamante', () => {
+  for (const list of ['canton-ti', 'TI', 'all', 'canton-gr canton-ti', 'ti,gr']) {
+    const res = runChain(CORE, { ...HIGH, CANTON_HIGH_CADENCE_SECTIONS: list, DECLARED: 'true', CHAIN_DEPTH: '3', NO_ARTICLE_STREAK: '1' });
+    assert.equal(res.dispatched, true, list);
+    assert.equal(res.url, 'https://api.github.com/repos/owner/repo/actions/workflows/generate-article-ti.yml/dispatches');
+    assert.deepEqual(res.payload, { ref: 'main', inputs: { section: 'canton-ti', chain_depth: '4', no_article_streak: '2', parent_run_id: '4242', rescue_depth: '0' } });
+  }
+});
+
+test('Chain cantonale: un articolo prodotto avvia il successore e azzera la serie secca, senza spendere il soccorso', () => {
+  const res = runChain(CORE, { ...HIGH, ARTICLE: 'true', DECLARED: 'true', CHAIN_DEPTH: '7', NO_ARTICLE_STREAK: '5', RESCUE_DEPTH: '1' });
+  assert.equal(res.dispatched, true);
+  assert.match(res.stdout, /^article: depth 7→8, streak 5→0, soccorso 1→1/m);
+  assert.deepEqual(res.payload.inputs, { section: 'canton-ti', chain_depth: '8', no_article_streak: '0', parent_run_id: '4242', rescue_depth: '1' });
+});
+
+test('Chain cantonale: i tetti restano quelli della catena nazionale (depth 40, streak 6, soccorso 1)', () => {
+  const dispatched = (extra) => runChain(CORE, { ...HIGH, ...extra }).dispatched;
+  assert.equal(dispatched({ DECLARED: 'true', CHAIN_DEPTH: '38', NO_ARTICLE_STREAK: '0' }), true);
+  assert.equal(dispatched({ DECLARED: 'true', CHAIN_DEPTH: '39', NO_ARTICLE_STREAK: '0' }), false, 'profondita 40');
+  assert.equal(dispatched({ ARTICLE: 'true', CHAIN_DEPTH: '39' }), false, 'anche un articolo rispetta il tetto di profondita');
+  assert.equal(dispatched({ DECLARED: 'true', NO_ARTICLE_STREAK: '4' }), true);
+  assert.equal(dispatched({ DECLARED: 'true', NO_ARTICLE_STREAK: '5' }), false, 'sei anelli secchi di fila');
+  assert.equal(dispatched({ ARTICLE: 'true', NO_ARTICLE_STREAK: '5' }), true, 'un articolo azzera la serie');
+  // Esito NON dichiarato: un solo soccorso per catena.
+  const rescue = runChain(CORE, { ...HIGH, DECLARED: 'false', RESCUE_DEPTH: '0' });
+  assert.equal(rescue.dispatched, true);
+  assert.equal(rescue.payload.inputs.rescue_depth, '1');
+  assert.equal(dispatched({ DECLARED: 'false', RESCUE_DEPTH: '1' }), false);
+});
+
+test('Chain cantonale: exit 5 (cap cooperativo), pool AI e roster bloccati, self-test e kill switch cedono allo slot', () => {
+  for (const stop of [
+    { COOPERATIVE_STOP: 'true' }, { PROVIDER_BLOCKED: 'true' }, { ROSTER_BLOCKED: 'true' },
+    { DRY: 'true' }, { CHAIN_ARMED: 'false' },
+    { ARTICLE: 'true', CHAIN_ARMED: 'false' },
+  ]) {
+    assert.equal(runChain(CORE, { ...HIGH, ...stop }).dispatched, false, JSON.stringify(stop));
+  }
+});
+
+test('Chain cantonale: il tetto orario di 3 run per sezione e il budget fermano la catena nel gate, non nel dispatch', () => {
+  // Il tetto orario e' valutato da `admit` per gli anelli (chain_depth > 0), sulle sole run del chiamante.
+  assert.match(CORE, /CHAIN_MAX_RUNS_PER_HOUR: \$\{\{ vars\.CANTON_CHAIN_MAX_RUNS_PER_HOUR \}\}/);
+  assert.match(CORE, /''\|\*\[!0-9\]\*\) cap=3 ;;/);
+  assert.doesNotMatch(CORE, /vars\.CHAIN_MAX_RUNS_PER_HOUR/);
+  assert.match(SOURCE, /vars\.CHAIN_MAX_RUNS_PER_HOUR/, 'la catena nazionale tiene il proprio tetto da 20');
+  assert.match(SOURCE, /cap=20 ;;/);
+  // Lo skip `daily-budget` del gate cantonale chiude la run prima del job `generate`, dove vive lo step Chain.
+  assert.match(CORE, /generate:\n {4}needs: \[admit, section_gate\]\n {4}if: needs\.admit\.outputs\.proceed == 'true' && needs\.section_gate\.outputs\.proceed == 'true'/);
+});
+
+test('caller: il contratto dispatch_origin del sito (solo manual e cloud_scheduler) non cambia', () => {
+  for (const { file } of CALLERS) {
+    const text = readWorkflow(file);
+    const block = text.slice(text.indexOf('      dispatch_origin:\n        type: choice'));
+    assert.match(block, /^ {6}dispatch_origin:\n {8}type: choice\n {8}default: manual\n {8}options:\n {10}- manual\n {10}- cloud_scheduler\n {6}loop_clock:/, `${file}: il sito legge queste opzioni per ammettere gli slot`);
+  }
 });
 
 /**
@@ -789,6 +874,7 @@ test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', 
     assert.equal(Number(m[1]), canton.cronMinute, `${file}: minuto`);
     assert.ok(!reserved.has(canton.cronMinute), `${file}: minuto ${canton.cronMinute} riservato a generate-article.yml`);
     const hours = m[2] === '*' ? Array.from({ length: 24 }, (_, h) => h) : m[2].split(',').map(Number);
+    assert.equal(canton.cadenceHours, 1, `${file}: il calendario e' orario per tutti (rete di ripartenza)`);
     assert.equal(hours.length, 24 / canton.cadenceHours, `${file}: ${hours.length} slot al giorno per una cadenza di ${canton.cadenceHours}h`);
     hours.forEach((h, i) => assert.equal(h, hours[0] + i * canton.cadenceHours, `${file}: ore non equidistanti`));
     assert.ok(hours[0] < canton.cadenceHours);
@@ -796,14 +882,18 @@ test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', 
     assert.ok(!seen.has(cron), `${file}: cron duplicato ${cron}`);
     seen.add(cron);
   }
-  // Per ogni ora del giorno, quanti cantoni hanno uno slot: senza sfasamento
-  // sarebbero tutti e 24 all'ora 0, contro un tetto globale di 3.
+  // Il calendario e' orario per tutti: ogni cantone ha uno slot in ogni ora, a
+  // un minuto proprio (verificato sopra: nessun cron duplicato). Lo sfasamento
+  // fra cantoni lo tiene la cadenza di base di 6 ore delle sezioni fuori lista,
+  // applicata da `canton-generation-admit.mjs`: per ogni ora non piu' di 8
+  // cantoni ne hanno uno slot di base (24 cantoni su 6 ore, 4 per ora).
   const perHour = Array.from({ length: 24 }, () => 0);
-  for (const { cron } of calendar.values()) {
-    const hoursField = cron.split(' ')[1];
-    for (const h of hoursField === '*' ? perHour.keys() : hoursField.split(',').map(Number)) perHour[h] += 1;
+  for (const hours of baseSlotHoursBySection(CANTONS.map((c) => c.section)).values()) {
+    assert.equal(hours.length, 4);
+    for (const h of hours) perHour[h] += 1;
   }
-  assert.ok(Math.max(...perHour) <= 8, `troppi cantoni nella stessa ora: ${perHour.join(',')}`);
+  assert.ok(Math.max(...perHour) <= 8, `troppi cantoni di base nella stessa ora: ${perHour.join(',')}`);
+  assert.equal(perHour.reduce((a, b) => a + b, 0), 24 * 4);
   assert.equal(cronExpression({ cronMinute: 5, cadenceHours: 1 }, 0), '5 * * * *');
   assert.equal(cronExpression({ cronMinute: 5, cadenceHours: 24 }, 0), '5 0 * * *');
   assert.throws(() => cronExpression({ cronMinute: 5, cadenceHours: 5 }, 0), /non divide le 24 ore/);
@@ -894,15 +984,17 @@ test('ogni chiamante passa al core la propria sezione, il proprio file e il prop
   for (const { canton, file, name, dispatchInputs, with: w } of CALLERS) {
     const { section } = canton;
     assert.equal(name, `Generate Blog Article (${section})`);
-    assert.deepEqual(Object.keys(w), ['section', 'caller_workflow', 'concurrency_group', 'body_path_regex', 'section_gate', 'chain_dispatch', 'url', 'dispatch_origin', 'loop_clock', 'recovery_slot', 'recovery_claim', 'dry_run']);
+    assert.deepEqual(Object.keys(w), ['section', 'caller_workflow', 'concurrency_group', 'body_path_regex', 'section_gate', 'chain_dispatch', 'chain_scope', 'url', 'dispatch_origin', 'chain_depth', 'no_article_streak', 'rescue_depth', 'parent_run_id', 'loop_clock', 'recovery_slot', 'recovery_claim', 'dry_run']);
     assert.equal(w.section, section);
     assert.equal(w.caller_workflow, file, 'ammissione e dispatch guardano le run di QUESTO file');
     assert.equal(w.concurrency_group, `generate-article-${section}`);
     assert.equal(w.section_gate, 'canton', 'senza il gate un cantone genererebbe col flag spento');
-    assert.equal(w.chain_dispatch, 'false', 'catena via dispatch spenta al lancio (D15)');
+    assert.equal(w.chain_dispatch, 'false', 'la catena non e\' mai armata dal chiamante: la arma la manopola Remote Config');
+    assert.equal(w.chain_scope, 'canton-high-cadence', 'la catena vale per le sole sezioni in CANTON_HIGH_CADENCE_SECTIONS');
+    assert.match(w.dispatch_origin, /^\$\{\{ inputs\.chain_depth != '' && inputs\.chain_depth != '0' && 'chain' \|\| inputs\.dispatch_origin \|\| 'manual' \}\}$/, `${file}: un anello arriva al gate come origine chain`);
     assert.equal(w.url, '${{ inputs.url }}');
     assert.equal(w.dry_run, '${{ inputs.dry_run == true }}');
-    assert.deepEqual(dispatchInputs, ['section', 'dispatch_origin', 'loop_clock', 'recovery_slot', 'recovery_claim', 'url', 'dry_run'], `${file}: dispatch manuale e slot autenticati`);
+    assert.deepEqual(dispatchInputs, ['section', 'dispatch_origin', 'loop_clock', 'recovery_slot', 'recovery_claim', 'chain_depth', 'no_article_streak', 'rescue_depth', 'parent_run_id', 'url', 'dry_run'], `${file}: dispatch manuale, slot autenticati e anelli della catena`);
     assert.ok(!groups.has(w.concurrency_group));
     groups.add(w.concurrency_group);
 
@@ -948,7 +1040,7 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
   const sectionGate = CORE.indexOf('\n  section_gate:\n');
   assert.doesNotMatch(CORE.slice(0, sectionGate), /request_generation_claim admit/);
-  assert.match(CORE.slice(sectionGate), /id: claim\n {8}if: inputs\.dispatch_origin == 'cloud_scheduler' && steps\.canton\.outputs\.proceed == 'true'/);
+  assert.match(CORE.slice(sectionGate), /id: claim\n {8}if: inputs\.dispatch_origin == 'cloud_scheduler' && \(steps\.canton\.outputs\.proceed == 'true' \|\| steps\.canton\.outputs\.consume_slot == 'true'\)/);
   assert.match(CORE.slice(sectionGate), /if request_generation_claim admit; then/);
   assert.match(CORE, /DISPATCH_ORIGIN: \$\{\{ inputs\.dispatch_origin \}\}/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);

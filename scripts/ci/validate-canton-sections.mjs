@@ -43,6 +43,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE_CADENCE_HOURS, HIGH_CADENCE_DAILY_BUDGET } from '../../generator/scripts/lib/canton-high-cadence.mjs';
 import { AG_PRESS_DETAIL, AG_PRESS_MAX_REQUESTS, ARTICLE_PATH_PATTERN_PARSERS, sourceRequestBudget } from '../../generator/scripts/lib/canton-news-sources.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -52,7 +53,20 @@ export const SLUGS_REL = 'generator/data/canton-url-slugs.json';
 export const CREATE_ARTICLE_REL = 'generator/scripts/create-article.mjs';
 export const GENERATE_WORKFLOW_REL = '.github/workflows/generate-article.yml';
 
-/** D19 — budget giornaliero per sezione, uniformato a 4 dal rollout del 2026-10-19. */
+/**
+ * Il calendario del profilo e' orario per tutti: 24 slot al giorno come rete di
+ * ripartenza. La cadenza di base di 6 ore delle sezioni fuori da
+ * `CANTON_HIGH_CADENCE_SECTIONS` non sta nel profilo ma e' applicata da
+ * `canton-generation-admit.mjs` (skip `admit-cadence`).
+ */
+export const CALENDAR_CADENCE_HOURS = 1;
+
+/**
+ * D19 — budget giornaliero per sezione, uniformato a 4 dal rollout del
+ * 2026-10-19. Una sezione in `CANTON_HIGH_CADENCE_SECTIONS` (Remote Config) ha
+ * invece `HIGH_CADENCE_DAILY_BUDGET` (24), deciso a runtime da
+ * `canton-generation-admit.mjs`: il profilo dichiara sempre il budget di base.
+ */
 export const DAILY_BUDGET_TIERS = Object.freeze({
   4: ['AG', 'APPENZELLO', 'BE', 'BASILEA', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'],
 });
@@ -331,8 +345,12 @@ export function validateCantonSections(doc, ctx) {
     if (!Array.isArray(c.languages) || !c.languages.length || !c.languages.every((l) => LANGUAGES.has(l))) err(where, `languages non valide: ${JSON.stringify(c.languages)}`);
     if (typeof c.enabled !== 'boolean') err(where, 'enabled deve essere boolean');
     if (!ALLOWED_CADENCE_HOURS.has(c.cadenceHours)) err(where, `cadenceHours ${c.cadenceHours} non divide le 24 ore`);
+    else if (c.cadenceHours !== CALENDAR_CADENCE_HOURS) err(where, `cadenceHours ${c.cadenceHours} != ${CALENDAR_CADENCE_HOURS}: il calendario e' orario per tutti, la cadenza di base di ${BASE_CADENCE_HOURS}h la applica admit`);
     const budget = expectedBudget(c.code);
     if (c.dailyBudget !== budget) err(where, `dailyBudget ${c.dailyBudget} != ${budget} (D19)`);
+    if (HIGH_CADENCE_DAILY_BUDGET <= c.dailyBudget || HIGH_CADENCE_DAILY_BUDGET > 24 / c.cadenceHours) {
+      err(where, `HIGH_CADENCE_DAILY_BUDGET ${HIGH_CADENCE_DAILY_BUDGET} deve stare fra il budget di base ${c.dailyBudget} e gli slot al giorno ${24 / c.cadenceHours}`);
+    }
 
     // 6. cron
     if (!Number.isInteger(c.cronMinute) || c.cronMinute < 0 || c.cronMinute > 59) err(where, `cronMinute ${c.cronMinute} non e' un minuto 0-59`);

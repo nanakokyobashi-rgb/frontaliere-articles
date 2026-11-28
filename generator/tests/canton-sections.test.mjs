@@ -286,6 +286,18 @@ test('viola: dailyBudget fuori dalla tabella D19', () => {
   expectViolation(doc, /SH: dailyBudget 5 != 4 \(D19\)/);
 });
 
+test('viola: il calendario del profilo e\' orario per tutti (F3.A.4), la cadenza di base la applica admit', () => {
+  const doc = clone();
+  canton(doc, 'TI').cadenceHours = 6;
+  expectViolation(doc, /TI: cadenceHours 6 != 1: il calendario e' orario per tutti/);
+  assert.deepEqual(validateCantonSections(clone(), CTX).filter((e) => /cadenceHours|HIGH_CADENCE/.test(e)), [], 'il profilo reale e\' conforme');
+  // Il budget alto (24) sta fra il budget di base e gli slot al giorno del calendario.
+  const slow = clone();
+  canton(slow, 'GR').cadenceHours = 24;
+  expectViolation(slow, /GR: cadenceHours 24 != 1/);
+  expectViolation(slow, /GR: HIGH_CADENCE_DAILY_BUDGET 24 deve stare fra il budget di base 4 e gli slot al giorno 1/);
+});
+
 test('viola: enum non validi e dato di categoria fra le news', () => {
   const doc = clone();
   const s = firstNews(doc, 'VD');
