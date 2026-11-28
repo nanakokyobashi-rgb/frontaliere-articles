@@ -240,6 +240,8 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
+      # La coalescenza legge la coda delle run di publish-api.
+      actions: read
     outputs:
       publish: ${{ steps.classify.outputs.publish }}
       source_commit: ${{ steps.classify.outputs.source_commit }}
@@ -261,6 +263,8 @@ jobs:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           EXPLICIT_REPLAY: ${{ inputs.source_commit != '' }}
           WORKFLOW_COMMIT: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
           set -euo pipefail
           if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
@@ -312,6 +316,49 @@ jobs:
           if [ "$trigger_inputs_differ" != true ] && [ "$trigger_inputs_differ" != false ]; then
             echo "::error::esito non valido dal confronto degli input trigger di publish-api"
             exit 1
+          fi
+          if [ "$trigger_inputs_differ" = true ] && [ "$EXPLICIT_REPLAY" != 'true' ]; then
+            # Run non-replay: se tra la revisione del workflow e main sono
+            # cambiati SOLO dati (content/, data/, sections/, registri, immagini)
+            # il codice e il workflow di questa run sono ancora quelli di main:
+            # si ritargetta la sorgente su main (come per api_input_changed)
+            # invece di saltare. Con commit continui, saltare farebbe superare
+            # ogni run dalla successiva e non pubblicherebbe mai nessuno.
+            if ! code_differs="$(node --input-type=module -e '
+              import { apiTriggerCodeDiffersBetween } from "./scripts/lib/publish-api-input-range.mjs";
+              const [before, after] = process.argv.slice(1);
+              process.stdout.write(String(apiTriggerCodeDiffersBetween({ before, after })));
+            ' "$WORKFLOW_COMMIT" "$current_main")"; then
+              echo "::error::impossibile classificare codice/dati degli input trigger di publish-api"
+              exit 1
+            fi
+            if [ "$code_differs" = false ]; then
+              # Coalescenza: se in coda c'e' gia' una run push PIU' RECENTE, sara'
+              # lei a pubblicare main (stessi dati, stesso codice): questa cede il
+              # posto in pochi secondi, cosi' la coda si svuota fino all'ultima,
+              # che ritargetta e pubblica. Senza, ogni run in coda farebbe una
+              # pubblicazione intera e con > 500 commit/giorno il backlog
+              # crescerebbe senza limite. Lettura non riuscita = nessuna
+              # coalescenza (fail-open: pubblicare di troppo e' sicuro,
+              # non pubblicare no).
+              newer_pending=0
+              if [ "$EVENT_NAME" = 'push' ]; then
+                if ! newer_pending="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/actions/workflows/publish-api.yml/runs?per_page=100" --jq '[.workflow_runs[] | select(.event == "push" and .run_number > '"$RUN_NUMBER"' and (.status == "queued" or .status == "pending" or .status == "waiting" or .status == "requested"))] | length')" ||
+                  ! [[ "$newer_pending" =~ ^[0-9]+$ ]]; then
+                  echo "::warning::coda publish-api non leggibile nel preflight: nessuna coalescenza, questa run pubblica"
+                  newer_pending=0
+                fi
+              fi
+              if [ "$newer_pending" -gt 0 ]; then
+                echo "::notice::publish-api coalesced: $newer_pending run push piu' recenti in coda pubblicheranno main=$current_main"
+              else
+                trigger_inputs_differ=false
+                echo "::notice::publish-api ritargettato: tra run=$WORKFLOW_COMMIT e main=$current_main cambiano solo dati; il codice del workflow e' invariato"
+              fi
+            elif [ "$code_differs" != true ]; then
+              echo "::error::esito non valido dalla classificazione codice/dati di publish-api"
+              exit 1
+            fi
           fi
           if [ "$trigger_inputs_differ" = true ]; then
             {
@@ -498,6 +545,24 @@ jobs:
           if [ "$trigger_inputs_differ" != true ] && [ "$trigger_inputs_differ" != false ]; then
             echo "::error::esito non valido dal confronto degli input trigger di publish-api"
             exit 1
+          fi
+          if [ "$trigger_inputs_differ" = true ] && [ "$EXPLICIT_REPLAY" != 'true' ]; then
+            # Stessa regola del preflight: solo dati cambiati -> si ritargetta.
+            if ! code_differs="$(node --input-type=module -e '
+              import { apiTriggerCodeDiffersBetween } from "./scripts/lib/publish-api-input-range.mjs";
+              const [before, after] = process.argv.slice(1);
+              process.stdout.write(String(apiTriggerCodeDiffersBetween({ before, after })));
+            ' "$GITHUB_SHA" "$current_main")"; then
+              echo "::error::impossibile classificare codice/dati degli input trigger di publish-api"
+              exit 1
+            fi
+            if [ "$code_differs" = false ]; then
+              trigger_inputs_differ=false
+              echo "::notice::publish-api ritargettato: tra run=$GITHUB_SHA e main=$current_main cambiano solo dati"
+            elif [ "$code_differs" != true ]; then
+              echo "::error::esito non valido dalla classificazione codice/dati di publish-api"
+              exit 1
+            fi
           fi
           if [ "$trigger_inputs_differ" = true ]; then
             echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
@@ -1084,6 +1149,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: governed cover publish
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       # A site-side licence-audit replacement keeps the article URL stable but
@@ -1102,6 +1168,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: governed cover publish (inside step)
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: |
           set -euo pipefail
           bash scripts/ci/verify-publish-api-source-current.sh
@@ -1249,6 +1316,14 @@ jobs:
                 )"; then
                   echo '::error::impossibile classificare il commit della cover queue prima di aggiornare la sorgente publish'
                   return 1
+                fi
+                if [ "$api_input_changed" = 'true' ] && [ "${VERIFY_API_ADVANCE:-skip}" = 'adopt' ]; then
+                  # Run non-replay: la sorgente A resta quella dell'artifact gia'
+                  # costruito. PUBLISH_API_SOURCE_COMMIT NON avanza (solo i commit
+                  # di sola coda cover lo fanno, sotto): la run della nuova push
+                  # pubblica il delta.
+                  echo "::notice::cover queue push ha incorporato input API tra $source_commit e $queued_head: la run prosegue sulla sorgente $source_commit e il delta lo pubblica la run successiva"
+                  return 0
                 fi
                 if [ "$api_input_changed" = 'true' ]; then
                   echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"

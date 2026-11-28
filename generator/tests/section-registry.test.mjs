@@ -1788,9 +1788,25 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(freshnessHelper, /VERIFY_API_ADVANCE/);
   assert.equal(
     (wf.match(/VERIFY_API_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/g) || []).length,
-    5,
-    'le cinque barriere dopo la build adottano l avanzamento; i replay bounded restano skip',
+    7,
+    'le barriere (cover pre-Pages, cover in-step, Pages, edge, ...) adottano l avanzamento; i replay bounded restano skip',
   );
+  // Preflight e source-current: solo-dati -> ritarget; codice/workflow -> skip; replay -> skip.
+  for (const guard of [preflight, barrier.slice(0, barrier.indexOf('PREFLIGHT: la sintassi') > 0 ? barrier.indexOf('PREFLIGHT: la sintassi') : 6000)]) {
+    assert.match(guard, /\[ "\$trigger_inputs_differ" = true \] && \[ "\$EXPLICIT_REPLAY" != 'true' \]/);
+    assert.match(guard, /apiTriggerCodeDiffersBetween/);
+    assert.match(guard, /cambiano solo dati/);
+  }
+  // Coalescenza nel preflight: una run push piu' recente in coda pubblica al suo posto; fail-open.
+  assert.match(preflight, /EVENT_NAME: \$\{\{ github\.event_name \}\}/);
+  assert.match(preflight, /RUN_NUMBER: \$\{\{ github\.run_number \}\}/);
+  assert.match(preflight, /actions\/workflows\/publish-api\.yml\/runs\?per_page=100/);
+  assert.match(preflight, /\.run_number > '"\$RUN_NUMBER"'/);
+  assert.match(preflight, /nessuna coalescenza, questa run pubblica/);
+  assert.match(preflight, /\[ "\$newer_pending" -gt 0 \]/);
+  const coverQueue = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
+  assert.match(coverQueue, /\[ "\$api_input_changed" = 'true' \] && \[ "\$\{VERIFY_API_ADVANCE:-skip\}" = 'adopt' \]/);
+  assert.match(coverQueue, /la run prosegue sulla sorgente \$source_commit/);
   assert.match(wf, /PUBLISH_API_EDGE_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/);
   assert.match(freshnessHelper, /PUBLISH_API_SKIP=true/);
   assert.match(freshnessHelper, /il commit dell'artifact resta/);
@@ -1799,10 +1815,10 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(queuePush, /apiInputChangedInRange/);
   assert.match(queuePush, /PUBLISH_API_SOURCE_COMMIT=\$queued_head/);
   assert.match(edgePublisher, /verifySourceCurrent = null/);
-  assert.match(edgePublisher, /await verifySourceCurrent\(\)/);
+  assert.match(edgePublisher, /await verifySourceCurrent\(\{ phase: 'flip' \}\)/);
   assert.match(edgePublisher, /apiInputChangedInRange/);
   assert.ok(
-    edgePublisher.indexOf('await verifySourceCurrent()') < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
+    edgePublisher.indexOf("await verifySourceCurrent({ phase: 'flip' })") < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
     'il guard interno deve precedere immediatamente il PUT del puntatore',
   );
   assert.match(wf, /Verify source before governed cover publish/);
