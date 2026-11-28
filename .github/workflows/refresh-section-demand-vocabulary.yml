@@ -105,11 +105,10 @@ jobs:
       - name: Guard — rinnovo gia' in volo
         id: guard
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
+          GH_TOKEN="$GITHUB_PAT_NANAKO" gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
             awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
           OPEN=$(grep -c '^chore/section-demand-vocabulary-' /tmp/open-prs.txt || true)
           echo "open_refreshes=$OPEN" >> "$GITHUB_OUTPUT"

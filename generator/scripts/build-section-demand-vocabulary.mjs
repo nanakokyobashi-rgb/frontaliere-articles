@@ -31,6 +31,7 @@
  * il file: un vocabolario vecchio e' meglio di uno vuoto. Le sezioni senza
  * righe restano fuori (il ranker le tratta come "vocabolario insufficiente").
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -300,8 +301,22 @@ async function main() {
   if (Object.keys(built).length === 0) throw new Error('nessuna sezione con query: il file non viene toccato');
   if (args['dry-run']) return;
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, `${JSON.stringify(document, null, 1)}\n`);
+  writeVocabularyAtomically(out, `${JSON.stringify(document, null, 1)}\n`);
   console.error(`scritto ${path.relative(process.cwd(), out)}`);
+}
+
+// Scrittura atomica: temp accanto al target + renameSync, cosi' un SIGKILL del
+// workflow (timeout-minutes) non lascia mai un vocabolario troncato.
+let writeTmpSeq = 0;
+function writeVocabularyAtomically(file, content) {
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    fs.writeFileSync(tmp, content);
+    fs.renameSync(tmp, file);
+  } catch (error) {
+    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw error;
+  }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
