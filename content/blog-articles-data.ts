@@ -48319,6 +48319,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'bollettino-frontaliere-2026-11-28',
+ category: 'novita',
+ date: '2026-11-28T14:01:13.589Z',
+ image: '/images/blog/article-bollettino-frontaliere-2026-11-28.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
