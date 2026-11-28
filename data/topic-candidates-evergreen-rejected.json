@@ -6828,6 +6828,78 @@
       "firstSeenAt": "2026-11-28T06:05:06.564Z",
       "lastValidatedAt": "2026-11-28T06:05:06.564Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Svitto guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:39:13.898Z",
+      "lastValidatedAt": "2026-11-28T07:39:13.898Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:44:55.318Z",
+      "lastValidatedAt": "2026-11-28T07:44:55.318Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Svitto guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:47:24.968Z",
+      "lastValidatedAt": "2026-11-28T07:47:24.968Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Svitto contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:50:42.093Z",
+      "lastValidatedAt": "2026-11-28T07:50:42.093Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Obvaldo aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:53:04.516Z",
+      "lastValidatedAt": "2026-11-28T07:53:04.516Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "premi cassa malati canton Obvaldo e riduzione premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T07:54:51.057Z",
+      "lastValidatedAt": "2026-11-28T07:54:51.057Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7846,10 +7918,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-28T05:59:56.436Z",
-      "lastStrikeAt": "2026-11-28T05:59:56.436Z",
-      "expiresAt": "2026-12-28T05:59:56.436Z"
+      "lastStrikeAt": "2026-11-28T07:38:25.659Z",
+      "expiresAt": "2026-12-28T07:38:25.659Z"
     },
     {
       "keyword": "targhe e immatricolazione canton Svitto guida a procedura e costi",
@@ -7862,6 +7934,18 @@
       "firstStrikeAt": "2026-11-28T06:17:31.452Z",
       "lastStrikeAt": "2026-11-28T06:17:31.452Z",
       "expiresAt": "2026-12-28T06:17:31.452Z"
+    },
+    {
+      "keyword": "collaudo veicoli canton Svitto convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T07:44:30.599Z",
+      "lastStrikeAt": "2026-11-28T07:44:30.599Z",
+      "expiresAt": "2026-12-28T07:44:30.599Z"
     }
   ],
   "legacy": [
