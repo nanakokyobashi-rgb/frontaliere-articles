@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'glarona-detrazioni-energia': { it: 'glarona-detrazioni-energia', en: 'glarus-energy-tax-deductions', de: 'glarus-steuerabzuege-energie', fr: 'glaris-deductions-fiscales-energie' },
  'glarona-detrazioni-energia-2029': { it: 'glarona-detrazioni-energia-2029', en: 'glarus-energy-deductions-2029', de: 'glarus-energieabzuege-2029', fr: 'glaris-deductions-energie-2029' },
  'netstal-via-secondaria': { it: 'netstal-via-secondaria', en: 'netstal-side-route', de: 'netstal-schleichweg', fr: 'netstal-route-secondaire' },
+ 'netstal-glarus-motion-proroga': { it: 'netstal-glarus-motion-proroga', en: 'netstal-glarus-bypass-motion-extension', de: 'netstal-glarus-umfahrung-motion-frist', fr: 'contournement-netstal-glaris-prolongation-motion' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
