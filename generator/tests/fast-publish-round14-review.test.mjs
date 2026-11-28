@@ -100,34 +100,55 @@ test('1: sectionsBehindRelease elenca solo le sezioni R2 indietro e rifiuta uno 
 });
 
 /** Esegue il listener in un repo git temporaneo con gli script di piano stubbati. */
-function runListener(root, { event, behind, publishedCommit = PUBLISHED, marked = false }) {
+function runListener(root, { event, behind, edgeCommit: edgeCommitOverride = null, marked = false }) {
   const repo = path.join(root, 'repo');
   const bin = path.join(root, 'bin');
   mkdirSync(path.join(repo, 'scripts/ci'), { recursive: true });
+  mkdirSync(path.join(repo, '.github/workflows'), { recursive: true });
   mkdirSync(bin, { recursive: true });
   const git = (...args) => execFileSync('git', args, { cwd: repo, encoding: 'utf8' }).trim();
   git('init', '-q');
   git('config', 'user.email', 'a@b.c');
   git('config', 'user.name', 'n');
   writeFileSync(path.join(repo, 'f'), '1');
-  git('add', 'f');
+  mkdirSync(path.join(repo, 'sections'), { recursive: true });
+  writeFileSync(path.join(repo, 'sections/registry.json'), '{"schema":1}\n');
+  git('add', 'f', 'sections/registry.json');
   git('commit', '-qm', 'one');
   const headSha = git('rev-parse', 'HEAD');
   writeFileSync(path.join(repo, 'f'), '2');
   git('commit', '-qam', 'two');
   const published = git('rev-parse', 'HEAD');
+  const workflowHeadSha = event === 'push' ? published : headSha;
+  const edgeCommit = edgeCommitOverride ?? published;
   const log = path.join(root, 'calls.log');
   copyFileSync(path.join(repoRoot, 'scripts/ci/fast-publish-api-only-decision.mjs'), path.join(repo, 'scripts/ci/fast-publish-api-only-decision.mjs'));
-  writeFileSync(path.join(repo, 'scripts/ci/resolve-workflow-run-push-range.mjs'), `process.exit(${marked ? 0 : 1});\n`);
+  copyFileSync(path.join(repoRoot, 'scripts/ci/fast-publish-section-edge-candidate.sh'), path.join(repo, 'scripts/ci/fast-publish-section-edge-candidate.sh'));
+  copyFileSync(path.join(repoRoot, '.github/workflows/fast-publish-section.yml'), path.join(repo, '.github/workflows/fast-publish-section.yml'));
+  const rangeScript = [
+    `if (process.argv.includes('--fast-publish-range')) process.exit(${marked ? 0 : 1});`,
+    event === 'push'
+      ? `console.log(${JSON.stringify(`before=${headSha}\nafter=${published}`)});`
+      : 'process.exit(1);',
+  ].join('\n');
+  writeFileSync(path.join(repo, 'scripts/ci/resolve-workflow-run-push-range.mjs'), `${rangeScript}\n`);
   writeFileSync(path.join(repo, 'scripts/ci/fast-publish-section.mjs'), `
 import { appendFileSync } from 'node:fs';
 const [cmd, arg] = process.argv.slice(2);
 appendFileSync(${JSON.stringify(log)}, cmd + ' ' + (arg ?? '') + '\\n');
-if (cmd === 'r2-edge-release-commit') console.log(${JSON.stringify(publishedCommit === PUBLISHED ? published : publishedCommit)});
-else if (cmd === 'r2-reconcile-plan') console.log(JSON.stringify([
-  { section: 'canton-ti', ids: [], bootstrap: true }, { section: 'canton-gr', ids: [], bootstrap: true },
-  { section: 'canton-vs', ids: [], bootstrap: true },
-  { section: 'canton-zz', ids: [], bootstrap: false, cleanupInactiveSurface: true }]));
+if (cmd === 'r2-edge-release-commit') console.log(${JSON.stringify(edgeCommit)});
+else if (cmd === 'r2-reconcile-plan') {
+  if (arg !== ${JSON.stringify(edgeCommit)}) {
+    console.error('registro edge sul commit ${edgeCommit}, atteso ' + arg);
+    process.exit(1);
+  }
+  console.log(JSON.stringify([
+    { section: 'canton-ti', ids: [], bootstrap: true }, { section: 'canton-gr', ids: [], bootstrap: true },
+    { section: 'canton-vs', ids: [], bootstrap: true },
+    { section: 'canton-zz', ids: [], bootstrap: false, cleanupInactiveSurface: true }]));
+}
+else if (cmd === 'r2-api-stage-plan-range') console.log(JSON.stringify([
+  { section: 'canton-gr', ids: ['article-a'], bootstrap: false }]));
 else process.exit(2);
 `);
   writeFileSync(path.join(repo, 'scripts/ci/wait-fast-publish-api-readiness.mjs'), `
@@ -148,7 +169,7 @@ console.log(JSON.stringify({ behind: ${JSON.stringify(behind)} }));
       GITHUB_RUN_ID: '777',
       REPO: 'owner/repo',
       WORKFLOW_RUN_EVENT: event,
-      WORKFLOW_RUN_HEAD_SHA: headSha,
+      WORKFLOW_RUN_HEAD_SHA: workflowHeadSha,
       WORKFLOW_RUN_DISPLAY_TITLE: 'Publish article data API (automatic)',
       GITHUB_PAT_NANAKO: 'x',
     },
@@ -158,6 +179,8 @@ console.log(JSON.stringify({ behind: ${JSON.stringify(behind)} }));
     result,
     published,
     headSha,
+    workflowHeadSha,
+    edgeCommit,
     dispatches: existsSync(dispatchLog) ? readFileSync(dispatchLog, 'utf8').trim().split('\n').filter(Boolean) : [],
     calls: existsSync(log) ? readFileSync(log, 'utf8') : '',
     output: readFileSync(output, 'utf8'),
@@ -183,6 +206,25 @@ for (const event of ['schedule', 'workflow_dispatch']) {
     assert.match(output, /dispatch_count=1/u);
   }), { timeout: 60_000 });
 }
+
+test('1: il listener push usa il registro edge antenato se la HEAD API è più nuova e il registry non è cambiato', () => withRoot('f1-r14-push-edge-ancestor-', (root) => {
+  const { result, published, headSha, workflowHeadSha, edgeCommit, dispatches, calls, output } = runListener(root, {
+    event: 'push',
+    behind: [],
+    edgeCommit: headSha,
+  });
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+  assert.equal(workflowHeadSha, published);
+  assert.equal(edgeCommit, headSha);
+  assert.notEqual(edgeCommit, workflowHeadSha);
+  assert.match(calls, new RegExp(`r2-edge-release-commit\\n`));
+  assert.match(calls, new RegExp(`r2-reconcile-plan ${edgeCommit}\\n`, 'u'));
+  assert.doesNotMatch(calls, new RegExp(`r2-reconcile-plan ${workflowHeadSha}`, 'u'));
+  assert.equal(dispatches.length, 1);
+  assert.match(dispatches[0], /section=canton-gr/u);
+  assert.match(dispatches[0], new RegExp(`api_release_commit=${workflowHeadSha}`, 'u'));
+  assert.match(output, /dispatch_count=1/u);
+}), { timeout: 60_000 });
 
 test('1: lo schedule settimanale con tutte le sezioni aggiornate non dispatcha niente', () => withRoot('f1-r14-schedule-current-', (root) => {
   const { result, dispatches, output } = runListener(root, { event: 'schedule', behind: [] });

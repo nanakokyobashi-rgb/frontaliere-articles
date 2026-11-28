@@ -74,7 +74,21 @@ if [ "$is_push" != 'true' ]; then
   fi
   git checkout --detach "$reconcile_commit" >/dev/null
 fi
-reconciliation_targets="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$reconcile_commit")"
+if [ "$is_push" = 'true' ]; then
+  edge_commit="$(node scripts/ci/fast-publish-section.mjs r2-edge-release-commit)"
+  if [ "$edge_commit" = "$reconcile_commit" ]; then
+    reconciliation_targets="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$reconcile_commit")"
+  else
+    # L'API può pubblicare una HEAD più nuova mentre il registro R2 conserva
+    # ancora la release edge precedente. La usiamo solo se è antenata della
+    # HEAD API e sections/registry.json non è cambiato: in caso contrario il
+    # candidato rifiuta la matrice e resta fail-closed.
+    reconciliation_targets="$(bash scripts/ci/fast-publish-section-edge-candidate.sh \
+      "$PWD" "$reconcile_commit" "$WORKFLOW_RUN_HEAD_SHA" 480)"
+  fi
+else
+  reconciliation_targets="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$reconcile_commit")"
+fi
 if [ "$is_push" != 'true' ]; then
   live_sections="$(jq -c '[.[] | select(.bootstrap == true and ((.cleanupInactiveSurface // false) | not)) | .section] | unique' <<<"$reconciliation_targets")"
   if [ "$live_sections" = '[]' ]; then
