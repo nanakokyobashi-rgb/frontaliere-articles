@@ -965,3 +965,50 @@ test('percentiles expose upper nearest-rank p50, p90 and max without inventing e
   assert.deepEqual(percentiles([5, 1, 4, 2, 3]), { count: 5, p50: 3, p90: 5, max: 5 });
   assert.deepEqual(percentiles([]), { count: 0, p50: null, p90: null, max: null });
 });
+
+import {
+  ghIdentityArgs,
+  getGithubRequestCount,
+  resetGithubRequestCount,
+  setGithubRunnerForTest,
+  setMeasureCacheDir,
+  viewRun,
+} from '../../scripts/ci/measure-section-cadence.mjs';
+
+test('identita GitHub: default senza --identity, override via MEASURE_GH_IDENTITY', () => {
+  assert.deepEqual(ghIdentityArgs({}), []);
+  assert.deepEqual(ghIdentityArgs({ MEASURE_GH_IDENTITY: 'default' }), []);
+  assert.deepEqual(ghIdentityArgs({ MEASURE_GH_IDENTITY: 'nanako' }), ['--identity', 'nanako']);
+});
+
+test('viewRun conta le richieste, salta i log dei run skipped e usa la cache su disco', async () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'measure-cache-'));
+  const calls = [];
+  const previous = setGithubRunnerForTest(async (argv) => {
+    calls.push(argv);
+    return argv.includes('--log') ? 'log-text' : JSON.stringify({ databaseId: 7, status: 'completed', conclusion: 'success', jobs: [] });
+  });
+  try {
+    setMeasureCacheDir(dir);
+    resetGithubRequestCount();
+    const run = { databaseId: 7, attempt: 1 };
+    const first = await viewRun(run, true);
+    assert.equal(first.logs, 'log-text');
+    assert.equal(getGithubRequestCount(), 2);
+    assert.ok(!calls[0].includes('--identity'));
+    const second = await viewRun(run, true);
+    assert.equal(second.logs, 'log-text');
+    assert.equal(getGithubRequestCount(), 2, 'secondo download evitato dalla cache');
+
+    setMeasureCacheDir(null);
+    resetGithubRequestCount();
+    setGithubRunnerForTest(async () => JSON.stringify({ databaseId: 8, status: 'completed', conclusion: 'skipped', jobs: [] }));
+    const skipped = await viewRun({ databaseId: 8 }, true);
+    assert.equal(skipped.logs, '');
+    assert.equal(getGithubRequestCount(), 1, 'nessun download log per run skipped');
+  } finally {
+    setGithubRunnerForTest(previous);
+    setMeasureCacheDir(null);
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
