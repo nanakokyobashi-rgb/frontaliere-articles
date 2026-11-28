@@ -22548,7 +22548,7 @@ async function main() {
               try {
                 console.error(`\n🎯 Ranker [${pool.name}] (tentativo ${attempt}/${MAX_DUPLICATE_RETRIES}): pool=${availableHeadlines.length} headlines mode=${_evidenceIndex ? 'cascade' : 'legacy'}`);
                 const consumed = _topicLoadConsumedTracker(SECTION_CONSUMED_PATH);
-                const picks = await _rankAndSelectHeadlines(availableHeadlines, _demandVocabulary, {
+                const picks = await withLlmCallStage('selection', () => _rankAndSelectHeadlines(availableHeadlines, _demandVocabulary, {
                   experimentalCandidates: _experimentalCandidates,
                   experimentalCounter: _experimentalCounterState.count,
                   todayPicksByCluster: _todayPicksState.picksByCluster,
@@ -22565,7 +22565,7 @@ async function main() {
                   // the GSC → embedding → cluster cascade. Legacy vocab
                   // path stays available for rollback (env=0).
                   evidence: _evidenceIndex,
-                });
+                }));
                 if (picks.length > 0) {
                   const top = picks[0];
                   rankerTier = top._selectedSource || 'stable';

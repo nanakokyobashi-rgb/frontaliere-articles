@@ -496,7 +496,7 @@ async function readPublishedApi() {
 function sectionSlugMap(section, slugs) {
   if (section === 'frontaliere') return slugs.blog;
   if (section === 'svizzera') return slugs.swiss;
-  return slugs.cantons;
+  return slugs.cantons?.[section];
 }
 
 function sectionMeta(section, meta) {
@@ -519,7 +519,8 @@ export function buildArticleRecords(api) {
     const id = article?.id;
     const core = ARTICLE_SECTION_CORE_ALL[section];
     const localeSlug = sectionSlugMap(section, api.slugs)?.[id]?.it;
-    const publishedDate = dateOnlyInZurich(article?.date);
+    const sourceDate = article?.date ?? article?.datePublished;
+    const publishedDate = dateOnlyInZurich(sourceDate);
     const missing = [];
     if (!id) missing.push('id');
     if (!core) missing.push('section');
@@ -544,7 +545,7 @@ export function buildArticleRecords(api) {
       kind: core.kind,
       slug: localeSlug,
       publishedDate,
-      date: article.date,
+      date: sourceDate,
       url: `${SITE_BASE}/${core.indexSlug.it}/${localeSlug}/`,
       title: typeof metadata?.[`${prefix}title`] === 'string' ? metadata[`${prefix}title`] : '',
       excerpt: typeof metadata?.[`${prefix}excerpt`] === 'string' ? metadata[`${prefix}excerpt`] : '',
@@ -569,10 +570,22 @@ export function summarizeM1IndexCoverage(api, normalized, from, to, sections = O
   ];
   const rowsInWindowBySection = Object.fromEntries(sections.map((section) => [section, 0]));
   let rowsWithUnknownSectionInWindow = 0;
+  let rowsWithUnknownDate = 0;
+  let rowsWithUnknownSection = 0;
+  let rowsWithUnknownSectionAndDate = 0;
+  const unknownDateRowsBySection = Object.fromEntries(sections.map((section) => [section, 0]));
   for (const [article, section] of rawRows) {
     const publishedDate = dateOnlyInZurich(article?.date ?? article?.datePublished);
-    if (!publishedDate || publishedDate < from || publishedDate > to) continue;
-    if (Object.hasOwn(rowsInWindowBySection, section)) rowsInWindowBySection[section] += 1;
+    const sectionKnown = Object.hasOwn(rowsInWindowBySection, section);
+    if (!sectionKnown) rowsWithUnknownSection += 1;
+    if (!publishedDate) {
+      rowsWithUnknownDate += 1;
+      if (sectionKnown) unknownDateRowsBySection[section] += 1;
+      else rowsWithUnknownSectionAndDate += 1;
+      continue;
+    }
+    if (publishedDate < from || publishedDate > to) continue;
+    if (sectionKnown) rowsInWindowBySection[section] += 1;
     else rowsWithUnknownSectionInWindow += 1;
   }
   const output = Object.fromEntries(sections.map((section) => {
@@ -595,18 +608,29 @@ export function summarizeM1IndexCoverage(api, normalized, from, to, sections = O
       duplicateSlugsCollapsedInWindow: duplicateSlugs.length,
       recordsWithUnknownDate: unknownDateRecords,
       skippedByReason,
-      coverageComplete: missingCandidates.length === 0 && unknownDateRecords === 0 && rowsWithUnknownSectionInWindow === 0,
+      coverageComplete: missingCandidates.length === 0
+        && (unknownDateRowsBySection[section] || unknownDateRecords) === 0
+        && rowsWithUnknownSectionInWindow === 0
+        && rowsWithUnknownSectionAndDate === 0,
     }];
   }));
   const unassignedSkippedCandidates = normalized.skippedRecords.filter((record) => record.section === 'unknown'
     && record.publishedDate >= from && record.publishedDate <= to).length;
-  if (unassignedSkippedCandidates > 0 || rowsWithUnknownSectionInWindow > 0) {
+  const unassignedUnknownDateSkippedCandidates = normalized.skippedRecords.filter((record) => record.section === 'unknown'
+    && !record.publishedDate).length;
+  if (unassignedSkippedCandidates > 0 || unassignedUnknownDateSkippedCandidates > 0 || rowsWithUnknownSectionInWindow > 0) {
     for (const section of sections) output[section].coverageComplete = false;
   }
+  const coverageComplete = Object.values(output).every((section) => section.coverageComplete);
   return {
+    coverageComplete,
     sections: output,
     rowsWithUnknownSectionInWindow,
+    rowsWithUnknownDate,
+    rowsWithUnknownSection,
+    rowsWithUnknownSectionAndDate,
     unassignedSkippedCandidates,
+    unassignedUnknownDateSkippedCandidates,
   };
 }
 
@@ -1010,8 +1034,12 @@ export function sectionFromGeneration(spec, run, markers, logText, attempts = []
   return slotSection && ARTICLE_SECTION_CORE_ALL[slotSection] ? slotSection : 'unknown';
 }
 
-function generationJob(jobs = []) {
-  return jobs.find((job) => /^generate(?:\s|$)/i.test(job.name)) || null;
+export function generationJob(jobs = []) {
+  return jobs.find((job) => {
+    const nameParts = String(job?.name || '').split('/');
+    const leafName = nameParts.at(-1)?.trim() || '';
+    return /^generate production$/i.test(leafName);
+  }) || null;
 }
 
 function initSectionMetrics(section, expectedSlots) {
@@ -1113,7 +1141,16 @@ export function generationJobWasAdmitted(job) {
   const conclusion = String(job.conclusion || '').toLowerCase();
   if (['skipped', 'cancelled'].includes(conclusion) || ['skipped', 'cancelled'].includes(status)) return false;
   if (status === 'completed') return dateMs(job.startedAt) !== null;
-  return ['queued', 'waiting', 'in_progress'].includes(status);
+  return generationJobIsQueued(job) || status === 'in_progress';
+}
+
+export function generationJobIsQueued(job) {
+  return ['queued', 'waiting', 'pending'].includes(normalizedJobStatus(job));
+}
+
+export function currentGenerateQueueWaitMinutes(job, createdAt, now = Date.now()) {
+  if (!Number.isFinite(createdAt) || !generationJobIsQueued(job)) return null;
+  return Math.max(0, now - createdAt) / 60_000;
 }
 
 export async function collectGenerationMetrics(window, sections, { workflowNames = null } = {}) {
@@ -1243,8 +1280,9 @@ export async function collectGenerationMetrics(window, sections, { workflowNames
             end: completedAt || (String(run.status).toLowerCase() === 'in_progress' ? now : startedAt),
             section: 'unknown',
           });
-        } else if (!inWindow && createdAt !== null && ['queued', 'waiting'].includes(normalizedJobStatus(job))) {
-          unscopedCurrentQueueWaitMinutes.push(Math.max(0, now - createdAt) / 60_000);
+        } else {
+          const currentQueueWait = currentGenerateQueueWaitMinutes(job, createdAt, now);
+          if (currentQueueWait !== null) unscopedCurrentQueueWaitMinutes.push(currentQueueWait);
         }
         if (inWindow && (attempts.length > 0 || (admittedUnknown && startedUnknown))) unassignedM4EligibleRuns += 1;
         if (inWindow && admittedUnknown && startedUnknown) {
@@ -1304,14 +1342,13 @@ export async function collectGenerationMetrics(window, sections, { workflowNames
       const createdAt = dateMs(run.createdAt);
       const startedAt = dateMs(job?.startedAt);
       const completedAt = dateMs(job?.completedAt);
-      if (!inWindow && createdAt !== null && job && ['queued', 'waiting'].includes(normalizedJobStatus(job))) {
-        bucket.currentGenerateQueueWaitMinutes.push(Math.max(0, now - createdAt) / 60_000);
-      } else if (inWindow && createdAt !== null && startedAt !== null) {
+      if (inWindow && createdAt !== null && startedAt !== null) {
         const queueWaitMs = Math.max(0, startedAt - createdAt);
         bucket.generateQueueWaitMinutes.push(queueWaitMs / 60_000);
         queueIntervals.push({ start: startedAt, end: completedAt || (String(run.status).toLowerCase() === 'in_progress' ? now : startedAt), section });
-      } else if (inWindow && createdAt !== null && job && ['queued', 'waiting'].includes(normalizedJobStatus(job))) {
-        bucket.currentGenerateQueueWaitMinutes.push(Math.max(0, now - createdAt) / 60_000);
+      } else {
+        const currentQueueWait = currentGenerateQueueWaitMinutes(job, createdAt, now);
+        if (currentQueueWait !== null) bucket.currentGenerateQueueWaitMinutes.push(currentQueueWait);
       }
       if (startedAt !== null && completedAt !== null) bucket.generateDurationMinutes.push(Math.max(0, completedAt - startedAt) / 60_000);
     }
@@ -2389,7 +2426,12 @@ async function collectBaseline(args) {
         from: args.from,
         to: args.to,
         rowsWithUnknownSectionInWindow: m1IndexCoverage.rowsWithUnknownSectionInWindow,
+        rowsWithUnknownDate: m1IndexCoverage.rowsWithUnknownDate,
+        rowsWithUnknownSection: m1IndexCoverage.rowsWithUnknownSection,
+        rowsWithUnknownSectionAndDate: m1IndexCoverage.rowsWithUnknownSectionAndDate,
         unassignedSkippedCandidates: m1IndexCoverage.unassignedSkippedCandidates,
+        unassignedUnknownDateSkippedCandidates: m1IndexCoverage.unassignedUnknownDateSkippedCandidates,
+        coverageComplete: m1IndexCoverage.coverageComplete,
         sections: m1IndexCoverage.sections,
       },
       m6CandidateIndexCoverage: {
