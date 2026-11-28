@@ -6696,6 +6696,18 @@
       "firstSeenAt": "2026-11-28T01:10:47.148Z",
       "lastValidatedAt": "2026-11-28T01:10:47.148Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "voto cantonale canton Svitto guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-28T02:32:50.365Z",
+      "lastValidatedAt": "2026-11-28T02:32:50.365Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
