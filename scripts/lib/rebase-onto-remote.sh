@@ -500,6 +500,26 @@ EOF
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       is_per_article "$f" || continue
+      # Bozze di traduzione pendenti: una cancellazione vince da qualunque lato.
+      # Upstream l'ha tolta perche' l'articolo e' stato pubblicato (o il budget
+      # e' esaurito), oppure e' il commit rigiocato a pubblicarlo; prendere
+      # l'altra copia resusciterebbe una bozza gia' conclusa.
+      case "$f" in
+        */pending-translation-drafts/*)
+          draft_stages="$(git ls-files -u -- "$f" | cut -f1 | awk '{print $3}' | tr '\n' ' ')"
+          case "$draft_stages" in
+            *2*3*|*3*2*) ;;
+            *)
+              if git rm -q -f -- "$f" >/dev/null 2>"$rebase_log"; then
+                per_article_resolved=$((per_article_resolved + 1))
+                continue
+              fi
+              echo "::warning::could not apply a pending translation draft deletion (path redacted) — aborting rather than resurrecting it"
+              abort_and_fail || exit 1
+              ;;
+          esac
+          ;;
+      esac
       if git checkout --theirs -- "$f" 2>/dev/null; then
         stage_conflict_paths "$f"
         per_article_resolved=$((per_article_resolved + 1))
