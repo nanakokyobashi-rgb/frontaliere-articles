@@ -58,6 +58,20 @@ test('ogni cantone ha almeno una fonte news (un cantone vuoto non potrebbe mai e
   assert.deepEqual(empty, []);
 });
 
+test('LU non interroga i feed Luzerner Zeitung che hanno restituito 403', () => {
+  const lucerna = canton(PROFILE, 'LU');
+  const host = 'www.luzernerzeitung.ch';
+  const active = lucerna.newsSources.filter((source) => new URL(source.url).hostname === host);
+  const rejected = lucerna.rejectedSources.filter((source) => new URL(source.url).hostname === host);
+
+  assert.equal(active.length, 0);
+  assert.equal(rejected.length, 5);
+  assert.ok(rejected.every((source) => source.reason === 'sourceUnavailable'));
+  assert.ok(rejected.every((source) => source.items7d === null));
+  assert.ok(rejected.every((source) => /HTTP 403/u.test(source.notes)));
+  assert.ok(lucerna.newsSources.some((source) => source.url === 'https://www.stadtluzern.ch/aktuelles/news.rss'));
+});
+
 test('le fonti news sono solo di tipo notizia; i dati di categoria non entrano nel generatore (D11)', () => {
   for (const c of PROFILE.cantons) {
     for (const s of c.newsSources) assert.ok(NEWS_KINDS.has(s.kind), `${c.code} ${s.url}: kind ${s.kind}`);

@@ -4246,79 +4246,6 @@
           "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo item 25.09.2026; campioni: «Wechsel an der Spitze der Dienststelle Personal: Roland Haas tritt als Personalleiter zurück», «Marianischer Saal ab Mitte Oktober wieder für bis zu 200 Personen geöffnet», «Hochrechnung II/2026: Ertragsüberschuss von 423,5 Millionen Franken». robots.txt 200 e path consentito, nessun blocco AI/ai-input=no; contatti e Disclaimer pubblici consultati."
         },
           {
-            "url": "https://www.luzernerzeitung.ch/zentralschweiz/luzern.rss",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Luzerner Zeitung (CH Media)",
-            "language": "de",
-            "kind": "media",
-            "topics": ["cronaca", "mobilita", "servizi", "lavoro", "eventi"],
-            "quirks": {
-              "paywall": "title+lead"
-            },
-            "items7d": 55,
-            "verifiedAt": "2026-10-08",
-            "notes": "57 item, 55 negli ultimi 7 giorni. Feed principale per il cantone LU (stesso contenuto della sezione /zentralschweiz/luzern). Feed RSS server-side, URL non in robots Disallow; robots.txt del sito blocca UA anthropic-ai/CCBot/GPTBot ecc. (il generatore usa un UA proprio). Molti pezzi sono paywall: usare titolo+lead del feed come segnale di tema, non riprodurre il testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-          },
-          {
-            "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Luzerner Zeitung (CH Media)",
-            "language": "de",
-            "kind": "media",
-            "topics": ["cronaca", "mobilita", "servizi"],
-            "quirks": {},
-            "items7d": 35,
-            "verifiedAt": "2026-10-08",
-            "notes": "Feed Zentralschweiz (LU/ZG/SZ/UR/OW/NW): 35 item recenti, quota Zug minoritaria (filtrare per keyword). Stesse note robots/AI del Zuger Zeitung. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-          },
-          {
-            "url": "https://www.luzernerzeitung.ch/thema/luzerner-polizei.rss",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Luzerner Zeitung (CH Media)",
-            "language": "de",
-            "kind": "polizia",
-            "topics": ["mobilita", "cronaca"],
-            "quirks": {
-              "paywall": "title+lead"
-            },
-            "items7d": 8,
-            "verifiedAt": "2026-10-08",
-            "notes": "Feed tematico (tag) per polizia LU: unico canale RSS verificato per i comunicati di polizia, perche' polizei.lu.ch non ha feed. 57 item, 8 in 7 giorni. Feed RSS server-side, URL non in robots Disallow; robots.txt del sito blocca UA anthropic-ai/CCBot/GPTBot ecc. (il generatore usa un UA proprio). Molti pezzi sono paywall: usare titolo+lead del feed come segnale di tema, non riprodurre il testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-          },
-          {
-            "url": "https://www.luzernerzeitung.ch/thema/praemienverbilligung.rss",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Luzerner Zeitung (CH Media)",
-            "language": "de",
-            "kind": "economia",
-            "topics": ["servizi", "fisco"],
-            "quirks": {
-              "paywall": "title+lead"
-            },
-            "items7d": 3,
-            "verifiedAt": "2026-10-08",
-            "notes": "Tag Prämienverbilligung/cassa malati: 68 item, 3 in 7 giorni. Feed RSS server-side, URL non in robots Disallow; robots.txt del sito blocca UA anthropic-ai/CCBot/GPTBot ecc. (il generatore usa un UA proprio). Molti pezzi sono paywall: usare titolo+lead del feed come segnale di tema, non riprodurre il testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-          },
-          {
-            "url": "https://www.luzernerzeitung.ch/thema/luzerner-kantonsspital.rss",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Luzerner Zeitung (CH Media)",
-            "language": "de",
-            "kind": "media",
-            "topics": ["servizi"],
-            "quirks": {
-              "paywall": "title+lead"
-            },
-            "items7d": 3,
-            "verifiedAt": "2026-10-08",
-            "notes": "Tag LUKS (Luzerner Kantonsspital): 262 item, 3 in 7 giorni. Sanita' cantonale. Feed RSS server-side, URL non in robots Disallow; robots.txt del sito blocca UA anthropic-ai/CCBot/GPTBot ecc. (il generatore usa un UA proprio). Molti pezzi sono paywall: usare titolo+lead del feed come segnale di tema, non riprodurre il testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-          },
-          {
             "url": "https://www.zentralplus.ch/feed/",
             "format": "rss",
             "parser": "rss",
@@ -4580,6 +4507,71 @@
           "reason": "noRecentItems",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz/luzern.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": null,
+          "origin": "rejected",
+          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": null,
+          "origin": "rejected",
+          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/thema/luzerner-polizei.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "polizia",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": null,
+          "origin": "rejected",
+          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/thema/praemienverbilligung.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "economia",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": null,
+          "origin": "rejected",
+          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/thema/luzerner-kantonsspital.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": null,
+          "origin": "rejected",
+          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
