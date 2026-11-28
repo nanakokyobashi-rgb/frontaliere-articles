@@ -112,7 +112,7 @@ fi
 if [ -n "$api_baseline" ] && [ "$latest" != "$api_baseline" ]; then
   new_api_changed="$(node scripts/ci/fast-publish-section.mjs r2-api-data-range "$api_baseline" "$latest")"
   if [ "$new_api_changed" = 'true' ]; then
-    new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$PUSH_AFTER" "$latest")"
+    new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$api_baseline" "$latest")"
   fi
 fi
 new_api_sections="$(jq -c --argjson failed "$failed_sections" '[.[].section] | unique | sort | . - $failed' <<<"$new_api_targets")"
@@ -138,7 +138,7 @@ if [ "$verified_latest" != "$latest" ]; then
   if [ -n "$api_baseline" ] && [ "$latest" != "$api_baseline" ]; then
     new_api_changed="$(node scripts/ci/fast-publish-section.mjs r2-api-data-range "$api_baseline" "$latest")"
     if [ "$new_api_changed" = 'true' ]; then
-      new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$PUSH_AFTER" "$latest")"
+      new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$api_baseline" "$latest")"
     fi
   fi
   new_api_sections="$(jq -c --argjson failed "$failed_sections" '[.[].section] | unique | sort | . - $failed' <<<"$new_api_targets")"
