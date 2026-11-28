@@ -96,7 +96,8 @@ test('lo stato di ogni sezione cantonale e\' suo: data/sections/<id>/, mai i fil
   for (const id of cantonSectionIds()) {
     const p = cantonSectionPaths(id);
     for (const key of ['sourceUrlsFile', 'sourceQuotaFile', 'quotaStateFile', 'experimentalCounterFile', 'evergreenCounterFile',
-      'consumedFile', 'todayPicksFile', 'evergreenRejectedFile', 'sidecarDir', 'embeddingsBinPath', 'embeddingsMetaPath']) {
+      'consumedFile', 'todayPicksFile', 'evergreenRejectedFile', 'sidecarDir', 'pendingTranslationDir',
+      'embeddingsBinPath', 'embeddingsMetaPath']) {
       assert.ok(p[key].startsWith(`${CANTON_STATE_ROOT}/${id}/`), `${id}.${key} fuori da ${CANTON_STATE_ROOT}/${id}/: ${p[key]}`);
       assert.ok(!HISTORICAL_STATE.includes(p[key]), `${id}.${key} riusa un file delle sezioni storiche`);
       assert.ok(!seen.has(p[key]), `${p[key]} condiviso fra ${seen.get(p[key])} e ${id}`);
@@ -193,7 +194,11 @@ test('gli argomenti di rebase coprono ogni file scritto, con la strategia giusta
     'content/blog-meta-canton-ti-de.ts',
     'content/blog-meta-canton-ti-fr.ts',
   ].sort());
-  assert.deepEqual(after('--take-theirs'), ['content/blog-body-canton-ti/', 'data/sections/canton-ti/articles/']);
+  assert.deepEqual(after('--take-theirs'), [
+    'content/blog-body-canton-ti/',
+    'data/sections/canton-ti/articles/',
+    'data/sections/canton-ti/pending-translation-drafts/',
+  ]);
   // I campi dei contatori sono quelli che i loro scrittori aggiornano davvero.
   const quota = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'lib', 'scheduler', 'quotaController.mjs'), 'utf8');
   assert.match(quota, /runCounter/);

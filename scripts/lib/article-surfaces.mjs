@@ -247,6 +247,7 @@ const KIND_WRITE_SURFACES = {
     sourceLedger: 'data/article-source-urls.json',
     sourceQuotaFile: 'data/article-source-quotas.json',
     sidecarDir: 'data/blog-articles',
+    pendingTranslationDir: 'data/sections/frontaliere/pending-translation-drafts',
   },
   national: {
     fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
@@ -260,6 +261,7 @@ const KIND_WRITE_SURFACES = {
     sourceLedger: 'data/swiss-article-source-urls.json',
     sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sidecarDir: 'data/swiss-articles',
+    pendingTranslationDir: 'data/sections/svizzera/pending-translation-drafts',
   },
   canton: (section) => {
     const p = cantonSectionPaths(section);
@@ -275,6 +277,7 @@ const KIND_WRITE_SURFACES = {
       sourceLedger: p.sourceUrlsFile,
       sourceQuotaFile: p.sourceQuotaFile,
       sidecarDir: p.sidecarDir,
+      pendingTranslationDir: p.pendingTranslationDir,
       stateBookkeeping: [p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile],
       hubDataFiles: hubFilePaths(section),
       stateCounters: [

@@ -2115,9 +2115,12 @@ test('i prefissi --take-theirs coprono i target per-articolo di ENTRAMBE le sezi
   }
   const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
   const sidecars = Object.values(SECTION_SURFACES).map(({ sidecarDir }) => `${corpusPath(sidecarDir)}/`);
+  const pendingTranslationDirs = Object.values(SECTION_SURFACES)
+    .map(({ pendingTranslationDir }) => `${pendingTranslationDir}/`);
   assert.equal(sidecars.length, Object.keys(ARTICLE_SECTION_CORE).length,
     `atteso un sidecarDir per sezione in create-article.mjs, trovati: ${JSON.stringify(sidecars)}`);
   for (const s of sidecars) expected.add(s);
+  for (const dir of pendingTranslationDirs) expected.add(dir);
   // P14: il credito di una copertina Commons e' un file per articolo
   // (`<slug>.json`) che il generatore scrive accanto all'hero; la cartella e'
   // la costante di chi lo scrive, non un letterale ricopiato.

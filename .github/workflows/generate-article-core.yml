@@ -1457,18 +1457,30 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true' && (steps.generate.outputs.cooperative_stop == 'true' || steps.generate.outputs.outcome_kind == 'error'))) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true' && (steps.generate.outputs.cooperative_stop == 'true' || steps.generate.outputs.outcome_kind == 'error' || steps.generate.outputs.outcome_kind == 'timeout'))) }}
         run: |
           set -euo pipefail
           discovery_recovery_only=false
+          pending_translation_recovery_only=false
+          recovery_only_commit=false
           if [ "${{ steps.generate.outcome }}" = "failure" ]; then
             if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
               echo "::error::failed generation reported an article; refusing to publish recovery-only state"
               exit 1
             fi
-            echo "::warning::generation failed without an article; discarding unverified changes and preserving only pool-attempt counters"
+            pending_section='${{ steps.generate.outputs.section }}'
+            pending_checkpoint="${RUNNER_TEMP:-/tmp}/pending-translation-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}.json"
+            pending_count="$(node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" capture "$pending_section" "$pending_checkpoint")"
+            case "$pending_count" in
+              ''|*[!0-9]*) echo "::error::invalid pending translation recovery count"; exit 1 ;;
+            esac
+            echo "::warning::generation failed without an article; discarding unverified changes and preserving validated recovery state"
             git reset --hard HEAD
             git clean -fd
+            if [ "$pending_count" -gt 0 ]; then
+              node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" restore "$pending_section" "$pending_checkpoint"
+              pending_translation_recovery_only=true
+            fi
             recovery_state='data/discovery-attempt-state.json'
             if git ls-files --error-unmatch -- "$recovery_state" >/dev/null 2>&1; then
               git restore --source=HEAD --worktree -- "$recovery_state"
@@ -1478,17 +1490,18 @@ jobs:
             shopt -s nullglob
             recovery_markers=( "${RUNNER_TEMP:-/tmp}/generate-diagnostics/discovery-attempt-"*.json )
             shopt -u nullglob
-            if [ "${#recovery_markers[@]}" -eq 0 ]; then
-              echo "no eligible discovery pool was selected; no recovery counter to commit"
+            if [ "${#recovery_markers[@]}" -gt 0 ]; then
+              node generator/scripts/record-discovery-attempt.mjs "${recovery_markers[@]}"
+              git add -- "$recovery_state"
+              if ! git diff --cached --quiet -- "$recovery_state"; then
+                discovery_recovery_only=true
+              fi
+            fi
+            if [ "$pending_translation_recovery_only" != "true" ] && [ "$discovery_recovery_only" != "true" ]; then
+              echo "no validated pending translation draft or discovery recovery counter to commit"
               exit 0
             fi
-            node generator/scripts/record-discovery-attempt.mjs "${recovery_markers[@]}"
-            git add -- "$recovery_state"
-            if git diff --cached --quiet; then
-              echo "no new discovery recovery counter to commit"
-              exit 0
-            fi
-            discovery_recovery_only=true
+            recovery_only_commit=true
           else
             git add -A
             if git diff --cached --quiet; then
@@ -1503,8 +1516,8 @@ jobs:
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
           POST_REBASE_RUN_REPORT="$RUNNER_TEMP/create-article-post-rebase-run-report.json"
           has_run_report=false
-          if [ "$discovery_recovery_only" = "true" ]; then
-            echo "post-failure recovery commit contains only the validated discovery-attempt state"
+          if [ "$recovery_only_commit" = "true" ]; then
+            echo "post-failure recovery commit contains only validated generator recovery state"
           elif [ -s .tmp/create-article-run-report.json ]; then
             cp .tmp/create-article-run-report.json "$RUN_REPORT"
             has_run_report=true
@@ -1546,7 +1559,11 @@ jobs:
             echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
-          if [ "$discovery_recovery_only" = "true" ]; then
+          if [ "$pending_translation_recovery_only" = "true" ] && [ "$discovery_recovery_only" = "true" ]; then
+            git commit --quiet -m "Record generator recovery state"
+          elif [ "$pending_translation_recovery_only" = "true" ]; then
+            git commit --quiet -m "Record pending translation recovery ($pending_section)"
+          elif [ "$discovery_recovery_only" = "true" ]; then
             git commit --quiet -m "Record discovery attempt recovery"
           elif [ "${{ steps.generate.outputs.article }}" = "true" ]; then
             git commit --quiet -m "Generate blog article (${{ steps.generate.outputs.section }})"

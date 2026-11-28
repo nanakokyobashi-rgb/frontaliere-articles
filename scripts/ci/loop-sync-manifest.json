@@ -6924,6 +6924,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/pending-article-translations.mjs",
+      "mode": "corpus-only",
+      "reason": "Persistenza e recovery per sezione delle traduzioni mancanti dopo che la bozza italiana ha superato il fact-check. Il generatore e il suo stato vivono nel corpus; il sito riceve solo articoli completi attraverso l’API JSON e non esegue questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/pending-translation-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Checkpoint temporaneo e ripristino/staging dei soli draft traduzione validati quando generate-article.yml o generate-article-core.yml scartano il checkout dopo timeout o errore. Il checkpoint vive in RUNNER_TEMP, mentre il draft validato rientra nello stato per-sezione del corpus; il sito non esegue questo recovery.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/lib/git-fetch-target.mjs",
       "mode": "identical",
       "baseline": {

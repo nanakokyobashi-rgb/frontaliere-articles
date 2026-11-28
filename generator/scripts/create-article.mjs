@@ -404,6 +404,15 @@ import {
   retryPendingBodyTranslations,
   assertNoPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
+import {
+  listPendingTranslationDrafts,
+  missingPendingTranslationFields,
+  clearPendingTranslationFields,
+  claimPendingTranslationDraft,
+  writePendingTranslationDraft,
+  removePendingTranslationDraft,
+  MAX_PENDING_TRANSLATION_ATTEMPTS,
+} from './lib/pending-article-translations.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
   isReservedPublishedSlug,
@@ -4002,6 +4011,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     sidecarDir: 'data/blog-articles',
     sourceQuotaFile: 'data/article-source-quotas.json',
     sourceUrlsFile: 'data/article-source-urls.json',
+    pendingTranslationDir: 'data/sections/frontaliere/pending-translation-drafts',
   },
   svizzera: {
     section: 'svizzera',
@@ -4028,6 +4038,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     sidecarDir: 'data/swiss-articles',
     sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sourceUrlsFile: 'data/swiss-article-source-urls.json',
+    pendingTranslationDir: 'data/sections/svizzera/pending-translation-drafts',
   },
   // Le 24 sezioni cantonali (P6b, D14): una voce per ogni `kind: 'canton'` di
   // ARTICLE_SECTION_CORE_ALL — anche le INATTIVE, perche' il dedup fra sezioni
@@ -4195,6 +4206,7 @@ const SOURCE_URLS_FILE = SECTION.sourceUrlsFile;
 // frontaliere e svizzera non hanno statePaths e i loader ricevono `{}`, cioe'
 // i path di sempre. Gli wrapper tengono i nomi dei call site storici.
 const SECTION_STATE_PATHS = SECTION.statePaths || null;
+const PENDING_TRANSLATION_DIR = SECTION.pendingTranslationDir;
 function sectionStateOpts(key) {
   return SECTION_STATE_PATHS ? { path: SECTION_STATE_PATHS[key] } : {};
 }
@@ -16295,7 +16307,7 @@ function removeFaqPairsWithRejectedControls(content, locale) {
   return rejectedCount;
 }
 
-async function translateArticle(data) {
+async function translateArticle(data, { resumeOnlyMissing = false } = {}) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
@@ -18301,16 +18313,27 @@ ${localizedToponymInstruction(targetLang)}`;
       return {};
     }
   };
-  const [enContent, deContent, frContent] = await Promise.all([
-    translateLocaleSafe('en', '2/5'),
-    translateLocaleSafe('de', '3/5'),
-    translateLocaleSafe('fr', '4/5'),
-  ]);
-  console.error(`  ✅ Tutte le traduzioni completate`);
+  if (resumeOnlyMissing) {
+    // Il draft contiene già le traduzioni accettate nelle run precedenti.
+    // Saltare il batch per locale è il vincolo che rende il resume selettivo:
+    // il recovery per-campo più sotto vede solo i campi che il chiamante ha
+    // riaperto esplicitamente con `clearPendingTranslationFields`.
+    for (const locale of ['en', 'de', 'fr']) {
+      if (!data.content[locale] || typeof data.content[locale] !== 'object') data.content[locale] = {};
+    }
+    console.error('  ♻️  Ripresa traduzione: batch completo saltato, restano solo i campi pendenti');
+  } else {
+    const [enContent, deContent, frContent] = await Promise.all([
+      translateLocaleSafe('en', '2/5'),
+      translateLocaleSafe('de', '3/5'),
+      translateLocaleSafe('fr', '4/5'),
+    ]);
+    console.error(`  ✅ Tutte le traduzioni completate`);
 
-  data.content.en = enContent;
-  data.content.de = deContent;
-  data.content.fr = frContent;
+    data.content.en = enContent;
+    data.content.de = deContent;
+    data.content.fr = frContent;
+  }
 
   // Validate translated content fields. A transient AI failure (429/timeout/
   // empty completion under quota exhaustion) can leave a single field empty —
@@ -22103,6 +22126,48 @@ async function main() {
     }
   }
 
+  // A verified Italian draft has priority over a new candidate. Claim the next
+  // bounded attempt on disk BEFORE any provider call, so a hard-killed run
+  // consumes its slot instead of creating an unbounded retry loop.
+  if (!DRY_RUN_SCAN && PENDING_TRANSLATION_DIR) {
+    const drafts = listPendingTranslationDrafts(PENDING_TRANSLATION_DIR, SECTION_NAME);
+    const exhaustedDrafts = drafts.filter((draft) => draft.attempts >= MAX_PENDING_TRANSLATION_ATTEMPTS);
+    if (exhaustedDrafts.length > 0) {
+      for (const draft of exhaustedDrafts) {
+        removePendingTranslationDraft(PENDING_TRANSLATION_DIR, draft.articleId);
+      }
+      const exhaustedIds = exhaustedDrafts.map((draft) => draft.articleId).join(', ');
+      const note =
+        `Deferred (pending translation recovery exhausted after ${MAX_PENDING_TRANSLATION_ATTEMPTS}/${MAX_PENDING_TRANSLATION_ATTEMPTS} attempts; article not published): ${exhaustedIds}`;
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
+      console.error(`TRANSLATION_EXHAUSTED section=${SECTION_NAME} attempts=${MAX_PENDING_TRANSLATION_ATTEMPTS}/${MAX_PENDING_TRANSLATION_ATTEMPTS} articles=${exhaustedIds}`);
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+      return;
+    }
+    const nextDraft = listPendingTranslationDrafts(PENDING_TRANSLATION_DIR, SECTION_NAME)
+      .find((draft) => draft.attempts < MAX_PENDING_TRANSLATION_ATTEMPTS);
+    if (nextDraft) {
+      const claimedDraft = claimPendingTranslationDraft(nextDraft);
+      if (!claimedDraft) throw new Error(`could not claim pending translation draft ${nextDraft.articleId}`);
+      writePendingTranslationDraft(PENDING_TRANSLATION_DIR, SECTION_NAME, claimedDraft);
+      const retryContext = {
+        ...claimedDraft.sourceContext,
+        _pendingTranslationDraft: claimedDraft,
+      };
+      if (typeof retryContext.date === 'string') {
+        const parsedDate = new Date(retryContext.date);
+        retryContext.date = Number.isNaN(parsedDate.getTime()) ? undefined : parsedDate;
+      }
+      console.error(
+        `TRANSLATION_RESUME section=${SECTION_NAME} article=${claimedDraft.articleId} `
+        + `attempt=${claimedDraft.attempts}/${MAX_PENDING_TRANSLATION_ATTEMPTS} `
+        + `missing=${claimedDraft.missingFields.length}`,
+      );
+      await generateAndValidateArticle(claimedDraft.sourceUrl, retryContext);
+      return;
+    }
+  }
+
   // ── Auto-scan mode: no URL provided → scan news sources first, then evergreen fallback ──
   if (!url) {
     // Evergreen quota counter (2026-05-07): the 30% hard-skip was reverted
@@ -22913,6 +22978,7 @@ async function main() {
             if (_persistRankerStateOnSuccess) _persistRankerStateOnSuccess();
             return; // Success — exit main
           } catch (e) {
+            if (e?.pendingTranslationIncomplete) throw e;
             const isDuplicate = isDuplicateError(e);
             if (isDuplicate && e.duplicateSourceContent) {
               RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
@@ -23264,6 +23330,7 @@ async function main() {
           } catch { /* ignore */ }
           return; // Success — exit main
         } catch (e) {
+          if (e?.pendingTranslationIncomplete) throw e;
           const isDuplicate = isDuplicateError(e);
           if (isDuplicate) captureDuplicateReasons(e.message);
           // Fact-check / quality failures → try next keyword instead of crashing.
@@ -23382,6 +23449,12 @@ async function main() {
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
 async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
+  const pendingTranslationDraft = sourceContext?._pendingTranslationDraft || null;
+  if (pendingTranslationDraft && pendingTranslationDraft.section !== SECTION_NAME) {
+    throw new Error(
+      `pending translation draft section mismatch: expected ${SECTION_NAME}, received ${pendingTranslationDraft.section}`,
+    );
+  }
   const translationDeadlineMs = initialTranslationDeadlineMs();
   // The shared cutoff leaves the minimum Codex call window plus the same
   // amount for preparing the translations. The helper already accounts for
@@ -23413,20 +23486,29 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Step 1: Fetch page content
-  pendingCantonSourceContent = typeof sourceContext?._cantonSourceContent === 'string'
-    ? sourceContext._cantonSourceContent
-    : '';
-  pendingCantonSourcePublishedAt = sourceContext?.date instanceof Date && !Number.isNaN(sourceContext.date.getTime())
-    ? sourceContext.date.toISOString()
-    : '';
-  pendingCantonSourceTitle = typeof sourceContext?.headline === 'string' ? sourceContext.headline : '';
+  pendingCantonSourceContent = pendingTranslationDraft?.pageContent
+    || (typeof sourceContext?._cantonSourceContent === 'string'
+      ? sourceContext._cantonSourceContent
+      : '');
+  pendingCantonSourcePublishedAt = pendingTranslationDraft?.sourceDate
+    || (sourceContext?.date instanceof Date && !Number.isNaN(sourceContext.date.getTime())
+      ? sourceContext.date.toISOString()
+      : '');
+  pendingCantonSourceTitle = pendingTranslationDraft?.sourceTitle
+    || (typeof sourceContext?.headline === 'string' ? sourceContext.headline : '');
   pendingCantonSourceLead = typeof sourceContext?._cantonSourceLead === 'string'
     ? sourceContext._cantonSourceLead
     : '';
   pendingCantonSourcePaywall = sourceContext?._cantonSourcePaywall === 'title+lead'
     ? sourceContext._cantonSourcePaywall
     : '';
-  const pageContent = await fetchPageContent(url, sourceContext);
+  const pageContent = pendingTranslationDraft
+    ? pendingTranslationDraft.pageContent
+    : await fetchPageContent(url, sourceContext);
+  if (pendingTranslationDraft) {
+    lastSourcePublishedAt = pendingTranslationDraft.sourceDate || '';
+    lastSourcePageTitle = pendingTranslationDraft.sourceTitle || '';
+  }
   const priorSource = loadSourceUrls()[normalizeNewsUrl(sourceUrl)];
   if (hasSameLedgerSourceContent(priorSource, pageContent)) {
     const err = new Error('DUPLICATO: testo della fonte già usato sullo stesso URL');
@@ -23497,7 +23579,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 2: Generate Italian content + metadata (no translations yet), with aggressive min-word retries
   // Rotates through GPT-4o → GPT-4o-mini → Gemini with escalating prompts
-  let data = null;
+  let data = pendingTranslationDraft
+    ? structuredClone(pendingTranslationDraft.data)
+    : null;
+  if (pendingTranslationDraft && sourceContext?._candidateTopicKey) {
+    Object.defineProperty(data, '_candidateTopicKey', {
+      value: sourceContext._candidateTopicKey,
+      configurable: true,
+    });
+  }
   let lastWordCount = 0;
 
   // A5 headline retry budget — spec: retry once with a refined prompt, then
@@ -23592,7 +23682,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   let sourceCopyChanged = false;
   let preTranslationExcerptRepairs = [];
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  for (let attempt = 1; !pendingTranslationDraft && attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
     // the loop, before any early `continue` — because an attempt abandoned on
     // the wall-clock guard below still consumed the run's budget, and a cost
@@ -24631,8 +24721,84 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     sourceDate: lastSourcePublishedAt,
   });
 
+  let pendingTranslationState = pendingTranslationDraft;
+  const pendingTranslationAttempt = pendingTranslationDraft?.attempts ?? 1;
+  const sourceContextForDraft = (() => {
+    const context = { ...(sourceContext || {}) };
+    delete context._pendingTranslationDraft;
+    try {
+      return JSON.parse(JSON.stringify(context));
+    } catch (error) {
+      throw new Error(`cannot persist verified Italian draft source context: ${error.message}`);
+    }
+  })();
+  const persistPendingTranslationState = (missingFields) => {
+    const now = new Date().toISOString();
+    const state = {
+      schema: 1,
+      section: SECTION_NAME,
+      articleId: data.id,
+      sourceUrl,
+      sourceContext: sourceContextForDraft,
+      pageContent,
+      sourceDate: lastSourcePublishedAt || '',
+      sourceTitle: lastSourcePageTitle || '',
+      data: structuredClone(data),
+      attempts: pendingTranslationAttempt,
+      missingFields,
+      createdAt: pendingTranslationState?.createdAt || now,
+      updatedAt: now,
+      verifiedAt: pendingTranslationState?.verifiedAt || now,
+    };
+    writePendingTranslationDraft(PENDING_TRANSLATION_DIR, SECTION_NAME, state);
+    pendingTranslationState = state;
+    return state;
+  };
+  const rejectIncompleteTranslation = (missingFields, cause = null) => {
+    const exhausted = pendingTranslationAttempt >= MAX_PENDING_TRANSLATION_ATTEMPTS;
+    if (exhausted) {
+      removePendingTranslationDraft(PENDING_TRANSLATION_DIR, data.id);
+    } else {
+      persistPendingTranslationState(missingFields);
+    }
+    const error = new Error(
+      `Traduzione incompleta per ${data.id}: ${missingFields.join(', ')}`,
+      cause ? { cause } : undefined,
+    );
+    error.qualityReject = true;
+    error.pendingTranslationIncomplete = true;
+    error.pendingTranslationExhausted = exhausted;
+    error.pendingTranslationAttempts = pendingTranslationAttempt;
+    error.pendingTranslationArticleId = data.id;
+    error.pendingTranslationFields = missingFields;
+    throw error;
+  };
+
+  // Ogni bozza italiana che ha superato i gate viene salvata PRIMA della
+  // prima chiamata di traduzione. In caso di arresto improvviso resta quindi
+  // una sorgente verificata da cui ripartire, senza rigenerare l'italiano.
+  if (pendingTranslationDraft) {
+    clearPendingTranslationFields(data, pendingTranslationDraft.missingFields);
+  } else {
+    persistPendingTranslationState(missingPendingTranslationFields(data));
+  }
+
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
-  await translateArticle(data);
+  try {
+    await translateArticle(data, { resumeOnlyMissing: Boolean(pendingTranslationDraft) });
+  } catch (translationError) {
+    const missingFields = missingPendingTranslationFields(data);
+    if (missingFields.length > 0 && translationError?.pendingBodyTranslations) {
+      rejectIncompleteTranslation(missingFields, translationError);
+    }
+    throw translationError;
+  }
+  const missingTranslations = missingPendingTranslationFields(data);
+  if (missingTranslations.length > 0) rejectIncompleteTranslation(missingTranslations);
+  // Keep the full translated candidate with the verified IT source while the
+  // remaining quality gates run. The state is removed only after the
+  // publication writer completes successfully.
+  persistPendingTranslationState([]);
 
   // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
   // istante della pipeline in cui i titoli tradotti esistono, quindi e' il
@@ -24972,6 +25138,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // registerArticleFiles(); this is the last identity check after every slug
   // derivation and immediately before the first corpus write.
   assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
+  const missingBeforePublish = missingPendingTranslationFields(data);
+  if (missingBeforePublish.length > 0) rejectIncompleteTranslation(missingBeforePublish);
+  persistPendingTranslationState([]);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -25023,6 +25192,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 5: Git add
   console.error('\n📦 Staging file:');
   gitAddAll(data);
+  // Keep the verified Italian draft through every quality check and the first
+  // staging operation. The workflow's final `git add -A` stages this deletion
+  // with the article, so the retry cannot be claimed after publication.
+  removePendingTranslationDraft(PENDING_TRANSLATION_DIR, data.id);
 
   console.error('\n✅ Articolo creato! I test verificheranno la correttezza.');
   console.error(`   Titolo: ${safeSignalTextForLog(data.content.it.title, sourceContext, '[signal title redacted]')}`);
@@ -26268,6 +26441,22 @@ if (invokedDirectly) {
     await exitAfterFlush(1);
   }).catch(async (e) => {
   const safeErrorMessage = safeSignalDiagnosticTextForLog(e?.message);
+  if (e?.pendingTranslationIncomplete) {
+    const state = e.pendingTranslationExhausted
+      ? `exhausted after ${e.pendingTranslationAttempts}/${MAX_PENDING_TRANSLATION_ATTEMPTS} attempts`
+      : `saved for attempt ${e.pendingTranslationAttempts}/${MAX_PENDING_TRANSLATION_ATTEMPTS}`;
+    finalizeRunReport('deferred', {
+      notes: [
+        ...RUN_REPORT.notes,
+        `Deferred (translations incomplete; article not published; ${state}): ${safeErrorMessage}`,
+      ],
+    });
+    console.error(
+      `\n⚠️  Traduzioni incomplete per ${e.pendingTranslationArticleId || 'articolo'}: ${state}. `
+      + 'L’articolo non viene pubblicato.',
+    );
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
   // ── IL CAMPIONE SI PRENDE PRIMA DEI RAMI, NON DENTRO UNO DI ESSI (#924) ────
   //
   // #804 / #832 / #787 — il campione, preso qui e non dedotto dal log.

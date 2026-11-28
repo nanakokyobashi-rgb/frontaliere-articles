@@ -351,6 +351,7 @@ export function cantonSectionPaths(section) {
     sourceUrlsFile: `${state}/article-source-urls.json`,
     sourceQuotaFile: `${state}/article-source-quotas.json`,
     quotaStateFile: `${state}/quota-state.json`,
+    pendingTranslationDir: `${state}/pending-translation-drafts`,
     experimentalCounterFile: `${state}/topic-candidates-experimental-counter.json`,
     evergreenCounterFile: `${state}/topic-candidates-evergreen-counter.json`,
     consumedFile: `${state}/topic-candidates-consumed.json`,
@@ -419,6 +420,7 @@ export function cantonSectionConfig(section, profiles = loadCantonSectionProfile
     sidecarDir: p.sidecarDir,
     sourceQuotaFile: p.sourceQuotaFile,
     sourceUrlsFile: p.sourceUrlsFile,
+    pendingTranslationDir: p.pendingTranslationDir,
     statePaths: Object.freeze({
       quotaState: p.quotaStateFile,
       experimentalCounter: p.experimentalCounterFile,

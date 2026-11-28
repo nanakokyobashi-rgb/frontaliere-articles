@@ -44,7 +44,7 @@ export function sectionRebaseSurfaces(sections) {
   const entries = Object.entries(sections ?? {});
   if (entries.length === 0) throw new Error('nessuna sezione attiva: niente da dichiarare al rebase');
   for (const [section, cfg] of entries) {
-    for (const key of ['sourceLedger', 'sourceQuotaFile', 'registryFile', 'slugDataFile', 'seoWriteFile', 'bodyDir', 'sidecarDir']) {
+    for (const key of ['sourceLedger', 'sourceQuotaFile', 'registryFile', 'slugDataFile', 'seoWriteFile', 'bodyDir', 'sidecarDir', 'pendingTranslationDir']) {
       if (typeof cfg?.[key] !== 'string' || !cfg[key]) {
         throw new Error(`sezione '${section}': superficie di scrittura '${key}' non dichiarata in article-surfaces.mjs`);
       }
@@ -66,7 +66,7 @@ export function sectionRebaseSurfaces(sections) {
       ...cfg.metaFiles,
       cfg.seoWriteFile,
     );
-    takeTheirs.push(`${cfg.bodyDir}/`, `${cfg.sidecarDir}/`);
+    takeTheirs.push(`${cfg.bodyDir}/`, `${cfg.sidecarDir}/`, `${cfg.pendingTranslationDir}/`);
   }
   return { bookkeeping, registries, takeTheirs, counters };
 }
