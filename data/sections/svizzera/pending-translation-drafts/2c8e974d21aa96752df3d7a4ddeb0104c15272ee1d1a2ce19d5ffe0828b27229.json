@@ -190,7 +190,7 @@
       "linkedinUrl": "https://www.linkedin.com/in/marco-ferrari-frontaliere-ticino/"
     }
   },
-  "attempts": 1,
+  "attempts": 2,
   "missingFields": [
     "en.body1",
     "en.body2",
@@ -199,7 +199,7 @@
     "fr.body2"
   ],
   "createdAt": "2026-11-28T14:26:48.184Z",
-  "updatedAt": "2026-11-28T14:36:22.308Z",
+  "updatedAt": "2026-11-28T14:48:53.364Z",
   "verifiedAt": "2026-11-28T14:26:48.184Z",
   "translationState": "unverified-candidate",
   "translationsVerified": false,
