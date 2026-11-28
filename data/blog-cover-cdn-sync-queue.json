@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-netstal-glarus-motion-proroga.webp",
+      "sha256": "c68f1ae424c753d903912d277eddaddb9834b2234402bf9589addfbd50f96188"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-netstal-glarus-motion-proroga-480w.webp",
+      "sha256": "983f63cd173cb9eb6fa7f6e3a7f5bb4493aed55f2975ce0c60447fdbfcb2f082"
+    }
+  ]
 }
